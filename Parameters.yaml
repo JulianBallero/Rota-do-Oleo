@@ -1,146 +1,50 @@
-# ==========================================
-# ROTA DO ÓLEO - CONFIGURAÇÕES DO PROJETO
-# ==========================================
-
 project:
   name: "Rota do Óleo"
-  version: "1.0.0"
-  description: "Sistema de agrupamento e otimização de rotas de coleta de óleo"
-
-# ==========================================
-# CONFIGURAÇÕES DE ENTRADA
-# ==========================================
+  version: "1.1.0"
+  description: "Agrupamento geográfico de clientes e geração de rotas aproximadas"
 
 input:
-  file: "./dataset/clientes.csv"
+  file: "dataset/clientes-com-coordenadas.csv"
   format: "csv"
-  encoding: "utf-8"
+  encoding: "utf-8-sig"
   separator: ","
-  required_columns:
-    - "ordem"
-    - "código"
-    - "cliente"
-    - "LAT"
-    - "LON"
-
-  max_clients: 70
-
-  coordinates:
-    latitude_column: "LAT"
-    longitude_column: "LON"
-    latitude_min: -90
-    latitude_max: 90
-    longitude_min: -180
-    longitude_max: 180
-
-# ==========================================
-# GEOCODIFICAÇÃO
-# ==========================================
+  max_clients: 10000
 
 geocoding:
-  enabled: true
+  enabled: false
   provider: "nominatim"
+  input_file: "dataset/clientes.csv"
+  address_column: "endereco"
   country: "Brazil"
   region: "Paraná"
-  user_agent: "rota_do_oleo"
+  user_agent: "rota_do_oleo_app"
   timeout: 10
-  retry_attempts: 3
-  cache_results: true
-
-# ==========================================
-# AGRUPAMENTO K-MEANS
-# ==========================================
+  retry_attempts: 2
 
 clustering:
   algorithm: "kmeans"
-
-  # Quantidade de grupos
-  n_clusters: 5
-
+  auto_clusters: true
+  min_clusters: 20
+  max_clusters: 20
+  n_clusters: 20
   random_state: 42
   n_init: 10
   max_iter: 300
-
-  # Colunas utilizadas no agrupamento
-  features:
-    - "LAT"
-    - "LON"
-
-# ==========================================
-# OTIMIZAÇÃO DE ROTAS
-# ==========================================
+  latitude_column: "latitude"
+  longitude_column: "longitude"
 
 routing:
-  algorithm: "knn"
-
-  # Critério para escolher o ponto inicial
+  algorithm: "nearest_neighbor_haversine"
   start_point: "highest_latitude"
-
-  # Colunas de coordenadas
-  latitude_column: "LAT"
-  longitude_column: "LON"
-
-  # Retornar ao ponto inicial após o último cliente
+  latitude_column: "latitude"
+  longitude_column: "longitude"
   return_to_start: false
 
-# ==========================================
-# ARQUIVOS DE SAÍDA
-# ==========================================
-
 output:
-  directory: "./output"
-
-  save_clusters: true
-  clusters_directory: "./output/grupos"
-
-  save_routes: true
-  routes_directory: "./output/rotas"
-
-  save_graphs: true
-  graphs_directory: "./output/graficos"
-
-  file_format: "csv"
-  encoding: "utf-8"
-
-  # Gerar arquivos separados para cada grupo
-  separate_cluster_files: true
-
-  # Gerar arquivo com a rota final
-  save_final_route: true
-
-# ==========================================
-# VISUALIZAÇÃO
-# ==========================================
-
-visualization:
-  enabled: true
-  show_clusters: true
-  show_routes: true
-  show_labels: true
-
-  graph_format: "png"
-  figure_size:
-    width: 12
-    height: 8
-
-# ==========================================
-# VALIDAÇÃO DOS DADOS
-# ==========================================
-
-validation:
-  check_missing_values: true
-  check_duplicate_clients: true
-  check_invalid_coordinates: true
-  require_coordinates: true
-
-  # Interromper execução caso haja erros
-  stop_on_error: true
-
-# ==========================================
-# LOGS
-# ==========================================
+  directory: "output"
+  clusters_directory: "output/grupos"
+  routes_directory: "output/rotas"
+  graphs_directory: "output/graficos"
 
 logging:
-  enabled: true
   level: "INFO"
-  file: "./output/rota_do_oleo.log"

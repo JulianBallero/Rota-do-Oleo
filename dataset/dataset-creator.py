@@ -1,34 +1,32 @@
-
-import pandas as pd
+"""Gera coordenadas fictícias para testes a partir de um CSV de clientes."""
+from pathlib import Path
+import argparse
 import random
+import pandas as pd
 
-# Input and output files
-input_file = "database-improvisado.csv"
-output_file = "clientes-com-coordenadas.csv"
+ROOT = Path(__file__).resolve().parents[1]
 
-# Read CSV
-df = pd.read_csv("dataset/database-improvisado.csv", sep=",", encoding="utf-8")
 
-# Define geographic boundaries
-lat_min = -25.334176
-lat_max = -25.332935
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--input", default="dataset/database-improvisado.csv")
+    parser.add_argument("--output", default="dataset/clientes-com-coordenadas.csv")
+    args = parser.parse_args()
+    input_path = ROOT / args.input
+    output_path = ROOT / args.output
 
-lon_min = -49.411334
-lon_max = -49.397602
+    if not input_path.is_file():
+        raise FileNotFoundError(f"CSV de origem não encontrado: {input_path}")
 
-# Generate random coordinates for each client
-df["latitude"] = [
-    random.uniform(lat_min, lat_max)
-    for _ in range(len(df))
-]
+    df = pd.read_csv(input_path, encoding="utf-8-sig")
+    random.seed(42)
+    # Região aproximada usada apenas para dados de demonstração.
+    df["latitude"] = [random.uniform(-25.334176, -25.332935) for _ in range(len(df))]
+    df["longitude"] = [random.uniform(-49.411334, -49.397602) for _ in range(len(df))]
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(output_path, index=False, encoding="utf-8-sig")
+    print(f"CSV de teste gerado: {output_path} ({len(df)} registros)")
 
-df["longitude"] = [
-    random.uniform(lon_min, lon_max)
-    for _ in range(len(df))
-]
 
-# Save new CSV
-df.to_csv("dataset/clientes-com-coordenadas.csv", index=False, encoding="utf-8-sig")
-
-print(f"File generated successfully: {output_file}")
-print(df.head())
+if __name__ == "__main__":
+    main()

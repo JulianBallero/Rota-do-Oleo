@@ -1,2 +1,7 @@
-dataset/database-improvisado.csv
-dataset/clientes.csv
+.venv/
+__pycache__/
+*.py[cod]
+output/*
+!output/grupos/
+!output/rotas/
+!output/graficos/

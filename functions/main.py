@@ -1,249 +1,132 @@
-
+"""Ponto de entrada do projeto Rota do Óleo. Execute da raiz: python -m functions.main"""
 import logging
-import pandas as pd
-
 from pathlib import Path
+import pandas as pd
+import yaml
 
-from geocoding import geocode_csv
-from kmeans import cluster_clients
-from knn import generate_route, plot_route
+from functions.agrupador.kmeans import cluster_clients
+from functions.roteirizador.knn import generate_route, plot_route
+from functions.geocoding import geocode_csv
 
+BASE_DIR = Path(__file__).resolve().parents[1]
+CONFIG_FILE = BASE_DIR / "Parameters.yaml"
 
-# ==========================================
-# CONFIGURAÇÕES GERAIS
-# ==========================================
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-CONFIG_FILE = BASE_DIR / "parameters.yaml"
-
-INPUT_FILE = BASE_DIR / "dataset" / "clientes.csv"
-
-OUTPUT_DIR = BASE_DIR / "output"
-
-GROUPS_DIR = OUTPUT_DIR / "grupos"
-ROUTES_DIR = OUTPUT_DIR / "rotas"
-GRAPHS_DIR = OUTPUT_DIR / "graficos"
-
-LOG_FILE = OUTPUT_DIR / "rota_do_oleo.log"
-
-MAX_CLIENTS = 70
-
-
-# ==========================================
-# LOGGING
-# ==========================================
-
-def setup_logging():
-
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(levelname)s - %(message)s",
-        handlers=[
-            logging.FileHandler(LOG_FILE, encoding="utf-8"),
-            logging.StreamHandler()
-        ]
-    )
-
-
-# ==========================================
-# CARREGAR CONFIGURAÇÕES
-# ==========================================
 
 def load_config():
+    if not CONFIG_FILE.is_file():
+        raise FileNotFoundError(f"Configuração não encontrada: {CONFIG_FILE}")
+    with CONFIG_FILE.open(encoding="utf-8") as stream:
+        return yaml.safe_load(stream) or {}
 
-    if not CONFIG_FILE.exists():
+
+def resolve_path(value):
+    path = Path(value)
+    return path if path.is_absolute() else BASE_DIR / path
+
+
+def normalize_columns(df):
+    """Remove espaços acidentais e padroniza nomes conhecidos sem acentos."""
+    aliases = {
+        "latitude": "latitude", "lat": "latitude",
+        "longitude": "longitude", "lon": "longitude", "long": "longitude",
+        "cliente": "cliente", "codigo": "codigo", "ordem": "ordem",
+    }
+    rename = {}
+    for column in df.columns:
+        cleaned = str(column).strip()
+        key = cleaned.casefold()
+        if key in aliases:
+            rename[column] = aliases[key]
+        elif key == "código":
+            rename[column] = "codigo"
+    return df.rename(columns=rename)
+
+
+def load_input(config):
+    input_cfg = config.get("input", {})
+    input_file = resolve_path(input_cfg.get("file", "dataset/clientes-com-coordenadas.csv"))
+    if not input_file.is_file():
         raise FileNotFoundError(
-            f"Arquivo de configuração não encontrado: {CONFIG_FILE}"
+            f"CSV de entrada não encontrado: {input_file}\n"
+            "Ajuste input.file em Parameters.yaml para apontar para o CSV existente."
         )
-
-    with open(CONFIG_FILE, "r", encoding="utf-8") as file:
-        config = yaml.safe_load(file)
-
-    return config or {}
-
-
-# ==========================================
-# VALIDAR ARQUIVO DE ENTRADA
-# ==========================================
-
-def validate_input():
-
-    if not INPUT_FILE.exists():
-        raise FileNotFoundError(
-            f"Arquivo CSV não encontrado: {INPUT_FILE}"
-        )
-
-    df = pd.read_csv(INPUT_FILE)
-
-    required_columns = [
-        "ordem",
-        "código",
-        "cliente"
-    ]
-
-    missing = [
-        col for col in required_columns
-        if col not in df.columns
-    ]
-
-    if missing:
+    df = pd.read_csv(
+        input_file,
+        sep=input_cfg.get("separator", ","),
+        encoding=input_cfg.get("encoding", "utf-8-sig"),
+    )
+    df = normalize_columns(df)
+    if df.empty:
+        raise ValueError(f"O CSV está vazio: {input_file}")
+    max_clients = int(input_cfg.get("max_clients", 10000))
+    if len(df) > max_clients:
         raise ValueError(
-            f"Colunas obrigatórias ausentes: {missing}"
+            f"O CSV possui {len(df)} registros, acima do limite configurado ({max_clients})."
         )
+    return df, input_file
 
-    if len(df) == 0:
-        raise ValueError("O arquivo CSV está vazio.")
-
-    if len(df) > MAX_CLIENTS:
-        raise ValueError(
-            f"Limite de {MAX_CLIENTS} clientes excedido. "
-            f"Arquivo contém {len(df)} clientes."
-        )
-
-    logging.info(f"{len(df)} clientes encontrados.")
-
-    return df
-
-
-# ==========================================
-# PREPARAR DIRETÓRIOS
-# ==========================================
-
-def create_directories():
-
-    for directory in [
-        GROUPS_DIR,
-        ROUTES_DIR,
-        GRAPHS_DIR
-    ]:
-        directory.mkdir(parents=True, exist_ok=True)
-
-
-# ==========================================
-# EXECUÇÃO PRINCIPAL
-# ==========================================
 
 def main():
+    config = load_config()
+    output_cfg = config.get("output", {})
+    output_dir = resolve_path(output_cfg.get("directory", "output"))
+    groups_dir = resolve_path(output_cfg.get("clusters_directory", "output/grupos"))
+    routes_dir = resolve_path(output_cfg.get("routes_directory", "output/rotas"))
+    graphs_dir = resolve_path(output_cfg.get("graphs_directory", "output/graficos"))
+    for folder in (output_dir, groups_dir, routes_dir, graphs_dir):
+        folder.mkdir(parents=True, exist_ok=True)
 
-    setup_logging()
+    logging.basicConfig(
+        level=getattr(logging, config.get("logging", {}).get("level", "INFO").upper(), logging.INFO),
+        format="%(asctime)s - %(levelname)s - %(message)s",
+        handlers=[
+            logging.FileHandler(output_dir / "rota_do_oleo.log", encoding="utf-8"),
+            logging.StreamHandler(),
+        ],
+        force=True,
+    )
+    logging.info("Iniciando Rota do Óleo")
+    df, input_file = load_input(config)
+    logging.info("CSV carregado: %s (%s clientes)", input_file, len(df))
 
-    logging.info("====================================")
-    logging.info("INICIANDO ROTA DO ÓLEO")
-    logging.info("====================================")
+    geo_cfg = config.get("geocoding", {})
+    lat_col = config.get("clustering", {}).get("latitude_column", "latitude")
+    lon_col = config.get("clustering", {}).get("longitude_column", "longitude")
+    # Geocodifica somente se explicitamente habilitado e se as coordenadas não estiverem completas.
+    if geo_cfg.get("enabled", False) and not {lat_col, lon_col}.issubset(df.columns):
+        logging.info("Coordenadas ausentes; iniciando geocodificação")
+        address_input = resolve_path(geo_cfg.get("input_file", input_file))
+        geo_output = output_dir / "clientes_coordenadas.csv"
+        df = normalize_columns(geocode_csv(address_input, geo_output, geo_cfg))
 
-    try:
-
-        # 1. Carregar configurações
-        config = load_config()
-
-        # 2. Criar diretórios
-        create_directories()
-
-        # 3. Validar entrada
-        df = validate_input()
-
-        # 4. Geocoding
-        if config.get("geocoding", {}).get("enabled", True):
-
-            logging.info("Iniciando geocoding...")
-
-            coordinates_file = (
-                OUTPUT_DIR / "clientes_coordenadas.csv"
-            )
-
-            geocode_csv(
-                input_file=INPUT_FILE,
-                output_file=coordinates_file,
-                config=config.get("geocoding", {})
-            )
-
-            df = pd.read_csv(coordinates_file)
-
-        # 5. Validar coordenadas
-        coordinate_columns = ["LAT", "LON"]
-
-        for col in coordinate_columns:
-            if col not in df.columns:
-                raise ValueError(
-                    f"Coluna de coordenada ausente: {col}"
-                )
-
-        if df[coordinate_columns].isnull().any().any():
-            raise ValueError(
-                "Existem clientes sem coordenadas válidas."
-            )
-
-        logging.info("Coordenadas validadas.")
-
-        # 6. K-Means
-        logging.info("Iniciando agrupamento K-Means...")
-
-        clusters = cluster_clients(
-            df=df,
-            config=config.get("clustering", {}),
-            output_dir=GROUPS_DIR
+    missing_cols = [c for c in (lat_col, lon_col) if c not in df.columns]
+    if missing_cols:
+        raise ValueError(
+            f"Colunas de coordenadas não encontradas: {missing_cols}. "
+            f"Colunas disponíveis: {list(df.columns)}"
         )
+    df[lat_col] = pd.to_numeric(df[lat_col], errors="coerce")
+    df[lon_col] = pd.to_numeric(df[lon_col], errors="coerce")
+    invalid = df[[lat_col, lon_col]].isna().any(axis=1)
+    if invalid.any():
+        logging.warning("%s registros sem coordenadas válidas serão ignorados.", int(invalid.sum()))
+        df = df.loc[~invalid].copy()
+    if df.empty:
+        raise ValueError("Nenhum cliente restante com coordenadas válidas.")
 
-        logging.info(
-            f"{len(clusters)} grupos gerados."
-        )
+    clusters = cluster_clients(df, config.get("clustering", {}), groups_dir)
+    logging.info("%s grupos criados", len(clusters))
 
-        # 7. KNN - Gerar rotas para cada cluster
-        logging.info("Iniciando geração das rotas...")
+    route_cfg = config.get("routing", {})
+    for cluster_id, cluster_df in clusters.items():
+        route = generate_route(cluster_df, route_cfg)
+        route_file = routes_dir / f"rota_cluster_{cluster_id}.csv"
+        route.to_csv(route_file, index=False, encoding="utf-8-sig")
+        plot_route(route, graphs_dir / f"rota_cluster_{cluster_id}.png", route_cfg)
+        logging.info("Cluster %s: %s paradas; rota salva em %s", cluster_id, len(route), route_file)
 
-        for cluster_id, cluster_df in clusters.items():
+    logging.info("Processamento concluído. Resultados em %s", output_dir)
 
-            logging.info(
-                f"Calculando rota do cluster {cluster_id}..."
-            )
-
-            route_df = generate_route(
-                df=cluster_df,
-                config=config.get("routing", {})
-            )
-
-            # Salvar rota
-            route_file = (
-                ROUTES_DIR / f"rota_cluster_{cluster_id}.csv"
-            )
-
-            route_df.to_csv(
-                route_file,
-                index=False,
-                encoding="utf-8-sig"
-            )
-
-            # Gerar gráfico
-            graph_file = (
-                GRAPHS_DIR / f"rota_cluster_{cluster_id}.png"
-            )
-
-            plot_route(
-                route_df=route_df,
-                output_file=graph_file
-            )
-
-            logging.info(
-                f"Rota do cluster {cluster_id} concluída."
-            )
-
-        logging.info("====================================")
-        logging.info("PROCESSAMENTO CONCLUÍDO COM SUCESSO")
-        logging.info("====================================")
-
-    except Exception as e:
-
-        logging.exception(
-            f"Erro durante o processamento: {e}"
-        )
-
-
-# ==========================================
-# ENTRY POINT
-# ==========================================
 
 if __name__ == "__main__":
     main()
