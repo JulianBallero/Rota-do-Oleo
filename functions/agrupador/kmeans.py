@@ -8,14 +8,14 @@ import os
 # CONFIGURATION
 # ==========================
 
-input_file = "./dataset/clientes-com-coordenadas.csv"
-output_file = "./output/clientes-agrupados.csv"
+input_file = "../dataset/clientes-com-coordenadas.csv"
+output_file = "../output/clientes-agrupados.csv"
 
 # Choose the number of clusters
 K = 5
 
 # Folder to save individual groups
-output_folder = "./output/grupos"
+output_folder = "../output/grupos"
 
 # ==========================
 # LOAD DATA
@@ -41,7 +41,7 @@ df["cluster"] = kmeans.fit_predict(X)
 # SAVE COMPLETE CSV
 # ==========================
 
-df.to_csv("./output/clientes-agrupados.csv", index=False, encoding="utf-8-sig")
+df.to_csv("../output/clientes-agrupados.csv", index=False, encoding="utf-8-sig")
 
 print(f"Complete file saved: {output_file}")
 

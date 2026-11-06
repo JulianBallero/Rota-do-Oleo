@@ -7,8 +7,8 @@ from sklearn.neighbors import NearestNeighbors
 # CONFIGURATION
 # ==========================
 
-input_file = "./output/grupos/cluster_0.csv"
-output_file = "./output/rotas/rota_cluster_0.csv"
+input_file = "../output/grupos/cluster_0.csv"
+output_file = "../output/rotas/rota_cluster_0.csv"
 
 # Geographic columns
 LAT = "latitude"
