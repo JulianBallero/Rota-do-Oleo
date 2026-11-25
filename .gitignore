@@ -5,3 +5,5 @@ output/*
 !output/grupos/
 !output/rotas/
 !output/graficos/
+/output
+/output
