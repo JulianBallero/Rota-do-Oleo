@@ -1,0 +1,5531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ac2db9df3af1889df32da827057844d0 {
+                    position: relative;
+                    width: 100.0vw;
+                    height: 100.0vh;
+
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>/*
+ * Glyphicons Halflings -- the icon font used by folium's default Awesome Markers
+ * (Icon(prefix="glyphicon")). Extracted from Bootstrap 3's glyphicon rules only.
+ *
+ * folium previously loaded netdna's bootstrap-glyphicons.css, which despite its
+ * name ships a full Bootstrap-3 base stylesheet (normalize reset + global `body`
+ * rules) that leaked onto the host page (GH-1820). This file provides just the
+ * @font-face and .glyphicon/.glyphicon-* rules needed for the markers, with no
+ * page-wide side effects. Font files are served from jsDelivr.
+ */
+@font-face{font-family:'Glyphicons Halflings';src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot');src:url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.woff') format('woff'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.ttf') format('truetype'),url('https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');}.glyphicon{position:relative;top:1px;display:inline-block;font-family:'Glyphicons Halflings';font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased;}
+.glyphicon-asterisk:before{content:"\2a";}
+.glyphicon-plus:before{content:"\2b";}
+.glyphicon-euro:before{content:"\20ac";}
+.glyphicon-minus:before{content:"\2212";}
+.glyphicon-cloud:before{content:"\2601";}
+.glyphicon-envelope:before{content:"\2709";}
+.glyphicon-pencil:before{content:"\270f";}
+.glyphicon-glass:before{content:"\e001";}
+.glyphicon-music:before{content:"\e002";}
+.glyphicon-search:before{content:"\e003";}
+.glyphicon-heart:before{content:"\e005";}
+.glyphicon-star:before{content:"\e006";}
+.glyphicon-star-empty:before{content:"\e007";}
+.glyphicon-user:before{content:"\e008";}
+.glyphicon-film:before{content:"\e009";}
+.glyphicon-th-large:before{content:"\e010";}
+.glyphicon-th:before{content:"\e011";}
+.glyphicon-th-list:before{content:"\e012";}
+.glyphicon-ok:before{content:"\e013";}
+.glyphicon-remove:before{content:"\e014";}
+.glyphicon-zoom-in:before{content:"\e015";}
+.glyphicon-zoom-out:before{content:"\e016";}
+.glyphicon-off:before{content:"\e017";}
+.glyphicon-signal:before{content:"\e018";}
+.glyphicon-cog:before{content:"\e019";}
+.glyphicon-trash:before{content:"\e020";}
+.glyphicon-home:before{content:"\e021";}
+.glyphicon-file:before{content:"\e022";}
+.glyphicon-time:before{content:"\e023";}
+.glyphicon-road:before{content:"\e024";}
+.glyphicon-download-alt:before{content:"\e025";}
+.glyphicon-download:before{content:"\e026";}
+.glyphicon-upload:before{content:"\e027";}
+.glyphicon-inbox:before{content:"\e028";}
+.glyphicon-play-circle:before{content:"\e029";}
+.glyphicon-repeat:before{content:"\e030";}
+.glyphicon-refresh:before{content:"\e031";}
+.glyphicon-list-alt:before{content:"\e032";}
+.glyphicon-flag:before{content:"\e034";}
+.glyphicon-headphones:before{content:"\e035";}
+.glyphicon-volume-off:before{content:"\e036";}
+.glyphicon-volume-down:before{content:"\e037";}
+.glyphicon-volume-up:before{content:"\e038";}
+.glyphicon-qrcode:before{content:"\e039";}
+.glyphicon-barcode:before{content:"\e040";}
+.glyphicon-tag:before{content:"\e041";}
+.glyphicon-tags:before{content:"\e042";}
+.glyphicon-book:before{content:"\e043";}
+.glyphicon-print:before{content:"\e045";}
+.glyphicon-font:before{content:"\e047";}
+.glyphicon-bold:before{content:"\e048";}
+.glyphicon-italic:before{content:"\e049";}
+.glyphicon-text-height:before{content:"\e050";}
+.glyphicon-text-width:before{content:"\e051";}
+.glyphicon-align-left:before{content:"\e052";}
+.glyphicon-align-center:before{content:"\e053";}
+.glyphicon-align-right:before{content:"\e054";}
+.glyphicon-align-justify:before{content:"\e055";}
+.glyphicon-list:before{content:"\e056";}
+.glyphicon-indent-left:before{content:"\e057";}
+.glyphicon-indent-right:before{content:"\e058";}
+.glyphicon-facetime-video:before{content:"\e059";}
+.glyphicon-picture:before{content:"\e060";}
+.glyphicon-map-marker:before{content:"\e062";}
+.glyphicon-adjust:before{content:"\e063";}
+.glyphicon-tint:before{content:"\e064";}
+.glyphicon-edit:before{content:"\e065";}
+.glyphicon-share:before{content:"\e066";}
+.glyphicon-check:before{content:"\e067";}
+.glyphicon-move:before{content:"\e068";}
+.glyphicon-step-backward:before{content:"\e069";}
+.glyphicon-fast-backward:before{content:"\e070";}
+.glyphicon-backward:before{content:"\e071";}
+.glyphicon-play:before{content:"\e072";}
+.glyphicon-pause:before{content:"\e073";}
+.glyphicon-stop:before{content:"\e074";}
+.glyphicon-forward:before{content:"\e075";}
+.glyphicon-fast-forward:before{content:"\e076";}
+.glyphicon-step-forward:before{content:"\e077";}
+.glyphicon-eject:before{content:"\e078";}
+.glyphicon-chevron-left:before{content:"\e079";}
+.glyphicon-chevron-right:before{content:"\e080";}
+.glyphicon-plus-sign:before{content:"\e081";}
+.glyphicon-minus-sign:before{content:"\e082";}
+.glyphicon-remove-sign:before{content:"\e083";}
+.glyphicon-ok-sign:before{content:"\e084";}
+.glyphicon-question-sign:before{content:"\e085";}
+.glyphicon-info-sign:before{content:"\e086";}
+.glyphicon-screenshot:before{content:"\e087";}
+.glyphicon-remove-circle:before{content:"\e088";}
+.glyphicon-ok-circle:before{content:"\e089";}
+.glyphicon-ban-circle:before{content:"\e090";}
+.glyphicon-arrow-left:before{content:"\e091";}
+.glyphicon-arrow-right:before{content:"\e092";}
+.glyphicon-arrow-up:before{content:"\e093";}
+.glyphicon-arrow-down:before{content:"\e094";}
+.glyphicon-share-alt:before{content:"\e095";}
+.glyphicon-resize-full:before{content:"\e096";}
+.glyphicon-resize-small:before{content:"\e097";}
+.glyphicon-exclamation-sign:before{content:"\e101";}
+.glyphicon-gift:before{content:"\e102";}
+.glyphicon-leaf:before{content:"\e103";}
+.glyphicon-eye-open:before{content:"\e105";}
+.glyphicon-eye-close:before{content:"\e106";}
+.glyphicon-warning-sign:before{content:"\e107";}
+.glyphicon-plane:before{content:"\e108";}
+.glyphicon-random:before{content:"\e110";}
+.glyphicon-comment:before{content:"\e111";}
+.glyphicon-magnet:before{content:"\e112";}
+.glyphicon-chevron-up:before{content:"\e113";}
+.glyphicon-chevron-down:before{content:"\e114";}
+.glyphicon-retweet:before{content:"\e115";}
+.glyphicon-shopping-cart:before{content:"\e116";}
+.glyphicon-folder-close:before{content:"\e117";}
+.glyphicon-folder-open:before{content:"\e118";}
+.glyphicon-resize-vertical:before{content:"\e119";}
+.glyphicon-resize-horizontal:before{content:"\e120";}
+.glyphicon-hdd:before{content:"\e121";}
+.glyphicon-bullhorn:before{content:"\e122";}
+.glyphicon-certificate:before{content:"\e124";}
+.glyphicon-thumbs-up:before{content:"\e125";}
+.glyphicon-thumbs-down:before{content:"\e126";}
+.glyphicon-hand-right:before{content:"\e127";}
+.glyphicon-hand-left:before{content:"\e128";}
+.glyphicon-hand-up:before{content:"\e129";}
+.glyphicon-hand-down:before{content:"\e130";}
+.glyphicon-circle-arrow-right:before{content:"\e131";}
+.glyphicon-circle-arrow-left:before{content:"\e132";}
+.glyphicon-circle-arrow-up:before{content:"\e133";}
+.glyphicon-circle-arrow-down:before{content:"\e134";}
+.glyphicon-globe:before{content:"\e135";}
+.glyphicon-tasks:before{content:"\e137";}
+.glyphicon-filter:before{content:"\e138";}
+.glyphicon-fullscreen:before{content:"\e140";}
+.glyphicon-dashboard:before{content:"\e141";}
+.glyphicon-heart-empty:before{content:"\e143";}
+.glyphicon-link:before{content:"\e144";}
+.glyphicon-phone:before{content:"\e145";}
+.glyphicon-usd:before{content:"\e148";}
+.glyphicon-gbp:before{content:"\e149";}
+.glyphicon-sort:before{content:"\e150";}
+.glyphicon-sort-by-alphabet:before{content:"\e151";}
+.glyphicon-sort-by-alphabet-alt:before{content:"\e152";}
+.glyphicon-sort-by-order:before{content:"\e153";}
+.glyphicon-sort-by-order-alt:before{content:"\e154";}
+.glyphicon-sort-by-attributes:before{content:"\e155";}
+.glyphicon-sort-by-attributes-alt:before{content:"\e156";}
+.glyphicon-unchecked:before{content:"\e157";}
+.glyphicon-expand:before{content:"\e158";}
+.glyphicon-collapse-down:before{content:"\e159";}
+.glyphicon-collapse-up:before{content:"\e160";}
+.glyphicon-log-in:before{content:"\e161";}
+.glyphicon-flash:before{content:"\e162";}
+.glyphicon-log-out:before{content:"\e163";}
+.glyphicon-new-window:before{content:"\e164";}
+.glyphicon-record:before{content:"\e165";}
+.glyphicon-save:before{content:"\e166";}
+.glyphicon-open:before{content:"\e167";}
+.glyphicon-saved:before{content:"\e168";}
+.glyphicon-import:before{content:"\e169";}
+.glyphicon-export:before{content:"\e170";}
+.glyphicon-send:before{content:"\e171";}
+.glyphicon-floppy-disk:before{content:"\e172";}
+.glyphicon-floppy-saved:before{content:"\e173";}
+.glyphicon-floppy-remove:before{content:"\e174";}
+.glyphicon-floppy-save:before{content:"\e175";}
+.glyphicon-floppy-open:before{content:"\e176";}
+.glyphicon-credit-card:before{content:"\e177";}
+.glyphicon-transfer:before{content:"\e178";}
+.glyphicon-cutlery:before{content:"\e179";}
+.glyphicon-header:before{content:"\e180";}
+.glyphicon-compressed:before{content:"\e181";}
+.glyphicon-earphone:before{content:"\e182";}
+.glyphicon-phone-alt:before{content:"\e183";}
+.glyphicon-tower:before{content:"\e184";}
+.glyphicon-stats:before{content:"\e185";}
+.glyphicon-sd-video:before{content:"\e186";}
+.glyphicon-hd-video:before{content:"\e187";}
+.glyphicon-subtitles:before{content:"\e188";}
+.glyphicon-sound-stereo:before{content:"\e189";}
+.glyphicon-sound-dolby:before{content:"\e190";}
+.glyphicon-sound-5-1:before{content:"\e191";}
+.glyphicon-sound-6-1:before{content:"\e192";}
+.glyphicon-sound-7-1:before{content:"\e193";}
+.glyphicon-copyright-mark:before{content:"\e194";}
+.glyphicon-registration-mark:before{content:"\e195";}
+.glyphicon-cloud-download:before{content:"\e197";}
+.glyphicon-cloud-upload:before{content:"\e198";}
+.glyphicon-tree-conifer:before{content:"\e199";}
+.glyphicon-tree-deciduous:before{content:"\e200";}
+.glyphicon-briefcase:before{content:"\1f4bc";}
+.glyphicon-calendar:before{content:"\1f4c5";}
+.glyphicon-pushpin:before{content:"\1f4cc";}
+.glyphicon-paperclip:before{content:"\1f4ce";}
+.glyphicon-camera:before{content:"\1f4f7";}
+.glyphicon-lock:before{content:"\1f512";}
+.glyphicon-bell:before{content:"\1f514";}
+.glyphicon-bookmark:before{content:"\1f516";}
+.glyphicon-fire:before{content:"\1f525";}
+.glyphicon-wrench:before{content:"\1f527";}
+</style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+    
+            
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_ac2db9df3af1889df32da827057844d0" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_ac2db9df3af1889df32da827057844d0 = L.map(
+                "map_ac2db9df3af1889df32da827057844d0",
+                {
+                    center: [-25.39157890912629, -49.25361129415003],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 14,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_a37b1ef1774d34829dcc9738e4128149 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri, Maxar, Earthstar Geographics",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_a37b1ef1774d34829dcc9738e4128149.addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var tile_layer_8d23a541afbed8fe3f153cd985bba73e = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_8d23a541afbed8fe3f153cd985bba73e.addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var layer_control_785b8dc2a54c34c4f4966d0ea678190b_layers = {
+                base_layers : {
+                    "Imagem de sat\u00e9lite" : tile_layer_a37b1ef1774d34829dcc9738e4128149,
+                    "Mapa de ruas" : tile_layer_8d23a541afbed8fe3f153cd985bba73e,
+                    "Sat\u00e9lite" : tile_layer_948d3a1b78bcf02afaa99848b6463039,
+                    "Mapa convencional" : tile_layer_effccbde7c07ebdd5b832ec95d0f03f5,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_785b8dc2a54c34c4f4966d0ea678190b = L.control.layers(
+                layer_control_785b8dc2a54c34c4f4966d0ea678190b_layers.base_layers,
+                layer_control_785b8dc2a54c34c4f4966d0ea678190b_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+
+        
+    
+            var tile_layer_948d3a1b78bcf02afaa99848b6463039 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri, Maxar, Earthstar Geographics",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_948d3a1b78bcf02afaa99848b6463039.addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var tile_layer_effccbde7c07ebdd5b832ec95d0f03f5 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_effccbde7c07ebdd5b832ec95d0f03f5.addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var marker_4b572547c27b184fe51915cdecb125e1 = L.marker(
+                [-25.367471650449552, -49.241912660501754],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_f662ab4c8725250f45b5229dc799706a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_18067fc50f49a4bb3e4195be562541c3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1c43cb65a76c5d1818287b9c05e46ba2 = $(`<div id="html_1c43cb65a76c5d1818287b9c05e46ba2" style="width: 100.0%; height: 100.0%;">Cliente: COZINHA INDUSTRIAL FAMILIA LTDA ME<br>Ordem: 1</div>`)[0];
+                popup_18067fc50f49a4bb3e4195be562541c3.setContent(html_1c43cb65a76c5d1818287b9c05e46ba2);
+            
+        
+
+        marker_4b572547c27b184fe51915cdecb125e1.bindPopup(popup_18067fc50f49a4bb3e4195be562541c3)
+        ;
+
+        
+    
+    
+            marker_4b572547c27b184fe51915cdecb125e1.bindTooltip(
+                `<div>
+                     Parada 1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_4b572547c27b184fe51915cdecb125e1.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_4b572547c27b184fe51915cdecb125e1.setIcon(icon_f662ab4c8725250f45b5229dc799706a);
+            
+    
+            var marker_adf2f05408ef7fe9d0a34ebc2f82d945 = L.marker(
+                [-25.369586493067853, -49.24351994474322],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_67af160596d01f7ed6e5cdbc1395712b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_362f10c77c885ef7a0d6da3d73c50a37 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_21a83789b055aa83b0ab3af01115687b = $(`<div id="html_21a83789b055aa83b0ab3af01115687b" style="width: 100.0%; height: 100.0%;">Cliente: SERGIO COSTA GOMES<br>Ordem: 2</div>`)[0];
+                popup_362f10c77c885ef7a0d6da3d73c50a37.setContent(html_21a83789b055aa83b0ab3af01115687b);
+            
+        
+
+        marker_adf2f05408ef7fe9d0a34ebc2f82d945.bindPopup(popup_362f10c77c885ef7a0d6da3d73c50a37)
+        ;
+
+        
+    
+    
+            marker_adf2f05408ef7fe9d0a34ebc2f82d945.bindTooltip(
+                `<div>
+                     Parada 2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_adf2f05408ef7fe9d0a34ebc2f82d945.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_adf2f05408ef7fe9d0a34ebc2f82d945.setIcon(icon_67af160596d01f7ed6e5cdbc1395712b);
+            
+    
+            var marker_5283198e13f1b0497cc7507690af7638 = L.marker(
+                [-25.371308441412484, -49.236696813459886],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_1cfeb1ab4b809ada75881be68255ff28 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_efb5ea561ed7e154ffc2933aa76ad0b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_318864a8b16551faa35899868e0c33d2 = $(`<div id="html_318864a8b16551faa35899868e0c33d2" style="width: 100.0%; height: 100.0%;">Cliente: MARIA MULLER SANTOS<br>Ordem: 3</div>`)[0];
+                popup_efb5ea561ed7e154ffc2933aa76ad0b7.setContent(html_318864a8b16551faa35899868e0c33d2);
+            
+        
+
+        marker_5283198e13f1b0497cc7507690af7638.bindPopup(popup_efb5ea561ed7e154ffc2933aa76ad0b7)
+        ;
+
+        
+    
+    
+            marker_5283198e13f1b0497cc7507690af7638.bindTooltip(
+                `<div>
+                     Parada 3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_5283198e13f1b0497cc7507690af7638.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5283198e13f1b0497cc7507690af7638.setIcon(icon_1cfeb1ab4b809ada75881be68255ff28);
+            
+    
+            var marker_e39bca7acd1dcaa0413780b9f1c1abec = L.marker(
+                [-25.380749306247044, -49.239477467428486],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_2a31f32cc2ed9e4bad2c89c2375b9861 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b396b792229baa367fa83357192eff12 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8bba8ca33a10d7fddee3b1bc03fe4e53 = $(`<div id="html_8bba8ca33a10d7fddee3b1bc03fe4e53" style="width: 100.0%; height: 100.0%;">Cliente: CONFEITARIA NOVA ERA ME<br>Ordem: 4</div>`)[0];
+                popup_b396b792229baa367fa83357192eff12.setContent(html_8bba8ca33a10d7fddee3b1bc03fe4e53);
+            
+        
+
+        marker_e39bca7acd1dcaa0413780b9f1c1abec.bindPopup(popup_b396b792229baa367fa83357192eff12)
+        ;
+
+        
+    
+    
+            marker_e39bca7acd1dcaa0413780b9f1c1abec.bindTooltip(
+                `<div>
+                     Parada 4
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_e39bca7acd1dcaa0413780b9f1c1abec.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_e39bca7acd1dcaa0413780b9f1c1abec.setIcon(icon_2a31f32cc2ed9e4bad2c89c2375b9861);
+            
+    
+            var marker_2f7ddacb6b104c4f15ab3cca1f0aa0d4 = L.marker(
+                [-25.38310071690329, -49.24119810272256],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_50aa8c1edbcf71e885179c873b48bf31 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3c0ab7a85ed204f89efecf285b8f49f4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fe92baa50c91c5d75a517f9b5986dcc3 = $(`<div id="html_fe92baa50c91c5d75a517f9b5986dcc3" style="width: 100.0%; height: 100.0%;">Cliente: SERGIO RIBEIRO EPP<br>Ordem: 5</div>`)[0];
+                popup_3c0ab7a85ed204f89efecf285b8f49f4.setContent(html_fe92baa50c91c5d75a517f9b5986dcc3);
+            
+        
+
+        marker_2f7ddacb6b104c4f15ab3cca1f0aa0d4.bindPopup(popup_3c0ab7a85ed204f89efecf285b8f49f4)
+        ;
+
+        
+    
+    
+            marker_2f7ddacb6b104c4f15ab3cca1f0aa0d4.bindTooltip(
+                `<div>
+                     Parada 5
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_2f7ddacb6b104c4f15ab3cca1f0aa0d4.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_2f7ddacb6b104c4f15ab3cca1f0aa0d4.setIcon(icon_50aa8c1edbcf71e885179c873b48bf31);
+            
+    
+            var marker_8504367e0dab58cbf2c82d390341be92 = L.marker(
+                [-25.383218209016835, -49.243850872346414],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_22f6f1b78c6989ddcfce628b40f87bca = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7187e9d78f343c0c2d1a984e437f7bd8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_95d05bc304e10405a47c48530eb6ef0c = $(`<div id="html_95d05bc304e10405a47c48530eb6ef0c" style="width: 100.0%; height: 100.0%;">Cliente: LUCIA NOWAK KOWALSKI<br>Ordem: 6</div>`)[0];
+                popup_7187e9d78f343c0c2d1a984e437f7bd8.setContent(html_95d05bc304e10405a47c48530eb6ef0c);
+            
+        
+
+        marker_8504367e0dab58cbf2c82d390341be92.bindPopup(popup_7187e9d78f343c0c2d1a984e437f7bd8)
+        ;
+
+        
+    
+    
+            marker_8504367e0dab58cbf2c82d390341be92.bindTooltip(
+                `<div>
+                     Parada 6
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_8504367e0dab58cbf2c82d390341be92.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_8504367e0dab58cbf2c82d390341be92.setIcon(icon_22f6f1b78c6989ddcfce628b40f87bca);
+            
+    
+            var marker_4543067221551c167d6aa6a013536854 = L.marker(
+                [-25.38194946195124, -49.243969476570555],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_74d158169ec117586477b20c6f66368c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e3373a40c3d12b050bdd11ef03c6e9d5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9e70bed9f745e50b340694c1b1c603f6 = $(`<div id="html_9e70bed9f745e50b340694c1b1c603f6" style="width: 100.0%; height: 100.0%;">Cliente: CHURRASCARIA CANTINHO LTDA<br>Ordem: 7</div>`)[0];
+                popup_e3373a40c3d12b050bdd11ef03c6e9d5.setContent(html_9e70bed9f745e50b340694c1b1c603f6);
+            
+        
+
+        marker_4543067221551c167d6aa6a013536854.bindPopup(popup_e3373a40c3d12b050bdd11ef03c6e9d5)
+        ;
+
+        
+    
+    
+            marker_4543067221551c167d6aa6a013536854.bindTooltip(
+                `<div>
+                     Parada 7
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_4543067221551c167d6aa6a013536854.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_4543067221551c167d6aa6a013536854.setIcon(icon_74d158169ec117586477b20c6f66368c);
+            
+    
+            var marker_1b8c2fb83bfa4765cb815e17b73b17eb = L.marker(
+                [-25.380815098418577, -49.244251065451465],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_bf598cc4ec7d3509584f4bf4d78059c2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e5b4e27007153b0ddc13d663c712da58 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0b8e33c0c98b1a57bc120b8423a205e4 = $(`<div id="html_0b8e33c0c98b1a57bc120b8423a205e4" style="width: 100.0%; height: 100.0%;">Cliente: CARLOS RIBEIRO SCHMIDT<br>Ordem: 8</div>`)[0];
+                popup_e5b4e27007153b0ddc13d663c712da58.setContent(html_0b8e33c0c98b1a57bc120b8423a205e4);
+            
+        
+
+        marker_1b8c2fb83bfa4765cb815e17b73b17eb.bindPopup(popup_e5b4e27007153b0ddc13d663c712da58)
+        ;
+
+        
+    
+    
+            marker_1b8c2fb83bfa4765cb815e17b73b17eb.bindTooltip(
+                `<div>
+                     Parada 8
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_1b8c2fb83bfa4765cb815e17b73b17eb.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_1b8c2fb83bfa4765cb815e17b73b17eb.setIcon(icon_bf598cc4ec7d3509584f4bf4d78059c2);
+            
+    
+            var marker_5f863f3e23989f25f10e2af8dafe115a = L.marker(
+                [-25.380798605514403, -49.24307413564147],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_a645c552b6ea46538d938b2d47840546 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d08e22e2c2d5e8123fd13fec3c217d04 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4c1796ad9c6e4bde7256e6293c5ca549 = $(`<div id="html_4c1796ad9c6e4bde7256e6293c5ca549" style="width: 100.0%; height: 100.0%;">Cliente: LUCIA OLIVEIRA LTDA<br>Ordem: 9</div>`)[0];
+                popup_d08e22e2c2d5e8123fd13fec3c217d04.setContent(html_4c1796ad9c6e4bde7256e6293c5ca549);
+            
+        
+
+        marker_5f863f3e23989f25f10e2af8dafe115a.bindPopup(popup_d08e22e2c2d5e8123fd13fec3c217d04)
+        ;
+
+        
+    
+    
+            marker_5f863f3e23989f25f10e2af8dafe115a.bindTooltip(
+                `<div>
+                     Parada 9
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_5f863f3e23989f25f10e2af8dafe115a.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5f863f3e23989f25f10e2af8dafe115a.setIcon(icon_a645c552b6ea46538d938b2d47840546);
+            
+    
+            var marker_30a7c78279f562f0c481b2814ebe1727 = L.marker(
+                [-25.3764336716487, -49.24590425644558],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_0b26b80bd2fdbcd9c019b7ee470ef36f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4b53e9f1e614c164827745e3d9286928 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5503cfe3259a510f8cf03eb157201a41 = $(`<div id="html_5503cfe3259a510f8cf03eb157201a41" style="width: 100.0%; height: 100.0%;">Cliente: MARIA OLIVEIRA LTDA<br>Ordem: 10</div>`)[0];
+                popup_4b53e9f1e614c164827745e3d9286928.setContent(html_5503cfe3259a510f8cf03eb157201a41);
+            
+        
+
+        marker_30a7c78279f562f0c481b2814ebe1727.bindPopup(popup_4b53e9f1e614c164827745e3d9286928)
+        ;
+
+        
+    
+    
+            marker_30a7c78279f562f0c481b2814ebe1727.bindTooltip(
+                `<div>
+                     Parada 10
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_30a7c78279f562f0c481b2814ebe1727.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_30a7c78279f562f0c481b2814ebe1727.setIcon(icon_0b26b80bd2fdbcd9c019b7ee470ef36f);
+            
+    
+            var marker_407f1a2c9d155732f7965b16aa1e78fe = L.marker(
+                [-25.376050841601074, -49.247909135464546],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_4b41f87d77d16d6eaf62681100530245 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0e6710be3c789a9497140adfe10f6442 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_27953e42f491761e150b55279782847f = $(`<div id="html_27953e42f491761e150b55279782847f" style="width: 100.0%; height: 100.0%;">Cliente: SORVETERIA TRADICAO EIRELI<br>Ordem: 11</div>`)[0];
+                popup_0e6710be3c789a9497140adfe10f6442.setContent(html_27953e42f491761e150b55279782847f);
+            
+        
+
+        marker_407f1a2c9d155732f7965b16aa1e78fe.bindPopup(popup_0e6710be3c789a9497140adfe10f6442)
+        ;
+
+        
+    
+    
+            marker_407f1a2c9d155732f7965b16aa1e78fe.bindTooltip(
+                `<div>
+                     Parada 11
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_407f1a2c9d155732f7965b16aa1e78fe.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_407f1a2c9d155732f7965b16aa1e78fe.setIcon(icon_4b41f87d77d16d6eaf62681100530245);
+            
+    
+            var marker_84981d11689956cc25bbb9277a4458ae = L.marker(
+                [-25.376103771011987, -49.25239201215348],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_aa26f40ee3692074698273c8aa2a5ab8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bcc000b6f0b7817fe980fc2a6ca1004d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0532b52ca217e21e0f7ad60c2214b7b9 = $(`<div id="html_0532b52ca217e21e0f7ad60c2214b7b9" style="width: 100.0%; height: 100.0%;">Cliente: RICARDO ZANETTI LTDA<br>Ordem: 12</div>`)[0];
+                popup_bcc000b6f0b7817fe980fc2a6ca1004d.setContent(html_0532b52ca217e21e0f7ad60c2214b7b9);
+            
+        
+
+        marker_84981d11689956cc25bbb9277a4458ae.bindPopup(popup_bcc000b6f0b7817fe980fc2a6ca1004d)
+        ;
+
+        
+    
+    
+            marker_84981d11689956cc25bbb9277a4458ae.bindTooltip(
+                `<div>
+                     Parada 12
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_84981d11689956cc25bbb9277a4458ae.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_84981d11689956cc25bbb9277a4458ae.setIcon(icon_aa26f40ee3692074698273c8aa2a5ab8);
+            
+    
+            var marker_13f1eadadc822c3a06ef1933b33569d8 = L.marker(
+                [-25.37611610746312, -49.253671896078444],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_0f979737ce8b4c9aa8cee9198c7342ce = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_23a6eb2b1372d39970276205530c32b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5b9e8b727da8f1de5b13e9376e259f7a = $(`<div id="html_5b9e8b727da8f1de5b13e9376e259f7a" style="width: 100.0%; height: 100.0%;">Cliente: CONFEITARIA ITALIANA LTDA<br>Ordem: 13</div>`)[0];
+                popup_23a6eb2b1372d39970276205530c32b7.setContent(html_5b9e8b727da8f1de5b13e9376e259f7a);
+            
+        
+
+        marker_13f1eadadc822c3a06ef1933b33569d8.bindPopup(popup_23a6eb2b1372d39970276205530c32b7)
+        ;
+
+        
+    
+    
+            marker_13f1eadadc822c3a06ef1933b33569d8.bindTooltip(
+                `<div>
+                     Parada 13
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_13f1eadadc822c3a06ef1933b33569d8.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_13f1eadadc822c3a06ef1933b33569d8.setIcon(icon_0f979737ce8b4c9aa8cee9198c7342ce);
+            
+    
+            var marker_16046ceee4aa28ee8e3a53dad9084589 = L.marker(
+                [-25.3807360004958, -49.25383983423523],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_65d36de194131e7486581dad967a72c0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1f228855fe33a61d3c0cab69a13a811f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9bd1c0512f4d079dbc7f01e66c59e080 = $(`<div id="html_9bd1c0512f4d079dbc7f01e66c59e080" style="width: 100.0%; height: 100.0%;">Cliente: FABIO ARAUJO LTDA<br>Ordem: 14</div>`)[0];
+                popup_1f228855fe33a61d3c0cab69a13a811f.setContent(html_9bd1c0512f4d079dbc7f01e66c59e080);
+            
+        
+
+        marker_16046ceee4aa28ee8e3a53dad9084589.bindPopup(popup_1f228855fe33a61d3c0cab69a13a811f)
+        ;
+
+        
+    
+    
+            marker_16046ceee4aa28ee8e3a53dad9084589.bindTooltip(
+                `<div>
+                     Parada 14
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_16046ceee4aa28ee8e3a53dad9084589.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_16046ceee4aa28ee8e3a53dad9084589.setIcon(icon_65d36de194131e7486581dad967a72c0);
+            
+    
+            var marker_4046e49122162c61792f0e76ba830afe = L.marker(
+                [-25.3812807178556, -49.253222767609365],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_7c1eebb31b11c28162ef577e2b6a2408 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9accd489bce23ae1d0867ad8b1461d6b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_07ed4902ae5d5eae5a471bc3f5eb92bc = $(`<div id="html_07ed4902ae5d5eae5a471bc3f5eb92bc" style="width: 100.0%; height: 100.0%;">Cliente: ACOUGUE E RESTAURANTE NOVA ERA LTDA ME<br>Ordem: 15</div>`)[0];
+                popup_9accd489bce23ae1d0867ad8b1461d6b.setContent(html_07ed4902ae5d5eae5a471bc3f5eb92bc);
+            
+        
+
+        marker_4046e49122162c61792f0e76ba830afe.bindPopup(popup_9accd489bce23ae1d0867ad8b1461d6b)
+        ;
+
+        
+    
+    
+            marker_4046e49122162c61792f0e76ba830afe.bindTooltip(
+                `<div>
+                     Parada 15
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_4046e49122162c61792f0e76ba830afe.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_4046e49122162c61792f0e76ba830afe.setIcon(icon_7c1eebb31b11c28162ef577e2b6a2408);
+            
+    
+            var marker_5d1b2708abd73d90580eadced0eaf80d = L.marker(
+                [-25.383668544470318, -49.25125523134691],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_d44d528ef12739140f09721048d8f61e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cc390f3dd9fa07f25d16e992a4e7e010 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a5c89cb2272861105c5822de17e78f35 = $(`<div id="html_a5c89cb2272861105c5822de17e78f35" style="width: 100.0%; height: 100.0%;">Cliente: MARCOS NASCIMENTO LTDA<br>Ordem: 16</div>`)[0];
+                popup_cc390f3dd9fa07f25d16e992a4e7e010.setContent(html_a5c89cb2272861105c5822de17e78f35);
+            
+        
+
+        marker_5d1b2708abd73d90580eadced0eaf80d.bindPopup(popup_cc390f3dd9fa07f25d16e992a4e7e010)
+        ;
+
+        
+    
+    
+            marker_5d1b2708abd73d90580eadced0eaf80d.bindTooltip(
+                `<div>
+                     Parada 16
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_5d1b2708abd73d90580eadced0eaf80d.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5d1b2708abd73d90580eadced0eaf80d.setIcon(icon_d44d528ef12739140f09721048d8f61e);
+            
+    
+            var marker_64b9aff3838f8b2f2fa92dc76b3997dd = L.marker(
+                [-25.384315255254542, -49.25177042964103],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_216512f874dc49c82b12455f1ac8b1b6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_da6aa6060bcc7a3d1a7f2707042bc563 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1aeb7c7762aa345b70b2c49351b24423 = $(`<div id="html_1aeb7c7762aa345b70b2c49351b24423" style="width: 100.0%; height: 100.0%;">Cliente: MARMITARIA ARAUCARIA ME<br>Ordem: 17</div>`)[0];
+                popup_da6aa6060bcc7a3d1a7f2707042bc563.setContent(html_1aeb7c7762aa345b70b2c49351b24423);
+            
+        
+
+        marker_64b9aff3838f8b2f2fa92dc76b3997dd.bindPopup(popup_da6aa6060bcc7a3d1a7f2707042bc563)
+        ;
+
+        
+    
+    
+            marker_64b9aff3838f8b2f2fa92dc76b3997dd.bindTooltip(
+                `<div>
+                     Parada 17
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_64b9aff3838f8b2f2fa92dc76b3997dd.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_64b9aff3838f8b2f2fa92dc76b3997dd.setIcon(icon_216512f874dc49c82b12455f1ac8b1b6);
+            
+    
+            var marker_e49734ca6fca69113afe2c4e8dae8467 = L.marker(
+                [-25.384949844324733, -49.25398972030378],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_204afd65f63ddc6f90db2ec615b3915a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7bffbe72f91eae148229de5a57a5ec58 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_138d71c0d1b49f36924cd6b6a8996c4a = $(`<div id="html_138d71c0d1b49f36924cd6b6a8996c4a" style="width: 100.0%; height: 100.0%;">Cliente: ANTONIO SCHMIDT LTDA<br>Ordem: 18</div>`)[0];
+                popup_7bffbe72f91eae148229de5a57a5ec58.setContent(html_138d71c0d1b49f36924cd6b6a8996c4a);
+            
+        
+
+        marker_e49734ca6fca69113afe2c4e8dae8467.bindPopup(popup_7bffbe72f91eae148229de5a57a5ec58)
+        ;
+
+        
+    
+    
+            marker_e49734ca6fca69113afe2c4e8dae8467.bindTooltip(
+                `<div>
+                     Parada 18
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_e49734ca6fca69113afe2c4e8dae8467.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_e49734ca6fca69113afe2c4e8dae8467.setIcon(icon_204afd65f63ddc6f90db2ec615b3915a);
+            
+    
+            var marker_09b2f9acea42827feecf6f433a84b673 = L.marker(
+                [-25.386479072267083, -49.25653341440706],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_e46970d9a4465348b254231d9e7b82f9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e581e5475fc99c587a41919439b388e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_41c213dfe3951249f468a98f7c2b276c = $(`<div id="html_41c213dfe3951249f468a98f7c2b276c" style="width: 100.0%; height: 100.0%;">Cliente: ANTONIO GOMES ME<br>Ordem: 19</div>`)[0];
+                popup_e581e5475fc99c587a41919439b388e6.setContent(html_41c213dfe3951249f468a98f7c2b276c);
+            
+        
+
+        marker_09b2f9acea42827feecf6f433a84b673.bindPopup(popup_e581e5475fc99c587a41919439b388e6)
+        ;
+
+        
+    
+    
+            marker_09b2f9acea42827feecf6f433a84b673.bindTooltip(
+                `<div>
+                     Parada 19
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_09b2f9acea42827feecf6f433a84b673.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_09b2f9acea42827feecf6f433a84b673.setIcon(icon_e46970d9a4465348b254231d9e7b82f9);
+            
+    
+            var marker_a29631d6726805ab04b830c2a6535985 = L.marker(
+                [-25.38796028297826, -49.25717881346138],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_80b38c21a74f4ee6ca7b8c92fb3d4949 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a335fee16fbf1600f349d395e7544a84 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_44e01a568494ef6b695cff56cd694eea = $(`<div id="html_44e01a568494ef6b695cff56cd694eea" style="width: 100.0%; height: 100.0%;">Cliente: RESTAURANTE CANTINHO LTDA<br>Ordem: 20</div>`)[0];
+                popup_a335fee16fbf1600f349d395e7544a84.setContent(html_44e01a568494ef6b695cff56cd694eea);
+            
+        
+
+        marker_a29631d6726805ab04b830c2a6535985.bindPopup(popup_a335fee16fbf1600f349d395e7544a84)
+        ;
+
+        
+    
+    
+            marker_a29631d6726805ab04b830c2a6535985.bindTooltip(
+                `<div>
+                     Parada 20
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_a29631d6726805ab04b830c2a6535985.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_a29631d6726805ab04b830c2a6535985.setIcon(icon_80b38c21a74f4ee6ca7b8c92fb3d4949);
+            
+    
+            var marker_59d4cf9a006e50a71b26fedca6f67bb8 = L.marker(
+                [-25.38719726807903, -49.261441558975896],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_2577426e8b44c17ba7f2323ee7da5cba = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_94fed51943f01112e24b8db51bcd4f1a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c138ea3bcd294d7e969bece058ed6c43 = $(`<div id="html_c138ea3bcd294d7e969bece058ed6c43" style="width: 100.0%; height: 100.0%;">Cliente: VANESSA ZANETTI SCHMIDT<br>Ordem: 21</div>`)[0];
+                popup_94fed51943f01112e24b8db51bcd4f1a.setContent(html_c138ea3bcd294d7e969bece058ed6c43);
+            
+        
+
+        marker_59d4cf9a006e50a71b26fedca6f67bb8.bindPopup(popup_94fed51943f01112e24b8db51bcd4f1a)
+        ;
+
+        
+    
+    
+            marker_59d4cf9a006e50a71b26fedca6f67bb8.bindTooltip(
+                `<div>
+                     Parada 21
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_59d4cf9a006e50a71b26fedca6f67bb8.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_59d4cf9a006e50a71b26fedca6f67bb8.setIcon(icon_2577426e8b44c17ba7f2323ee7da5cba);
+            
+    
+            var marker_6f198aa9b7ae48497283b9cb8707b38d = L.marker(
+                [-25.38524209063937, -49.26278721396313],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_cbe7baa9f18fba4f784a8dc469c68448 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_644622f8b8dd7b206904f6f9a804169c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a715e76b34b3ba8eeb83ab52ddca8dfd = $(`<div id="html_a715e76b34b3ba8eeb83ab52ddca8dfd" style="width: 100.0%; height: 100.0%;">Cliente: JOAO OLIVEIRA SOUZA<br>Ordem: 22</div>`)[0];
+                popup_644622f8b8dd7b206904f6f9a804169c.setContent(html_a715e76b34b3ba8eeb83ab52ddca8dfd);
+            
+        
+
+        marker_6f198aa9b7ae48497283b9cb8707b38d.bindPopup(popup_644622f8b8dd7b206904f6f9a804169c)
+        ;
+
+        
+    
+    
+            marker_6f198aa9b7ae48497283b9cb8707b38d.bindTooltip(
+                `<div>
+                     Parada 22
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_6f198aa9b7ae48497283b9cb8707b38d.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_6f198aa9b7ae48497283b9cb8707b38d.setIcon(icon_cbe7baa9f18fba4f784a8dc469c68448);
+            
+    
+            var marker_db53e23f52b7e6335810d9d881b10adf = L.marker(
+                [-25.381566801005388, -49.263859937895496],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_f6b78b3c5736260f9efa7e91c119155c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d856c151229a8c7d6b10ad5a3868f7ed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7addf4af0eef66d812b6ea999df19f26 = $(`<div id="html_7addf4af0eef66d812b6ea999df19f26" style="width: 100.0%; height: 100.0%;">Cliente: PASTELARIA DOURADA<br>Ordem: 23</div>`)[0];
+                popup_d856c151229a8c7d6b10ad5a3868f7ed.setContent(html_7addf4af0eef66d812b6ea999df19f26);
+            
+        
+
+        marker_db53e23f52b7e6335810d9d881b10adf.bindPopup(popup_d856c151229a8c7d6b10ad5a3868f7ed)
+        ;
+
+        
+    
+    
+            marker_db53e23f52b7e6335810d9d881b10adf.bindTooltip(
+                `<div>
+                     Parada 23
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_db53e23f52b7e6335810d9d881b10adf.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_db53e23f52b7e6335810d9d881b10adf.setIcon(icon_f6b78b3c5736260f9efa7e91c119155c);
+            
+    
+            var marker_3ee6b1028b29a0fdb7868183aa209a31 = L.marker(
+                [-25.377176633237106, -49.25954092353538],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_b52e225392c22293b3de7a8161769add = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_04f4b07b8309ed45ef93517908c9ee09 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_32e1523ae2dd222b0593ec481fc40231 = $(`<div id="html_32e1523ae2dd222b0593ec481fc40231" style="width: 100.0%; height: 100.0%;">Cliente: ROSANGELA RIBEIRO CARVALHO<br>Ordem: 24</div>`)[0];
+                popup_04f4b07b8309ed45ef93517908c9ee09.setContent(html_32e1523ae2dd222b0593ec481fc40231);
+            
+        
+
+        marker_3ee6b1028b29a0fdb7868183aa209a31.bindPopup(popup_04f4b07b8309ed45ef93517908c9ee09)
+        ;
+
+        
+    
+    
+            marker_3ee6b1028b29a0fdb7868183aa209a31.bindTooltip(
+                `<div>
+                     Parada 24
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_3ee6b1028b29a0fdb7868183aa209a31.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_3ee6b1028b29a0fdb7868183aa209a31.setIcon(icon_b52e225392c22293b3de7a8161769add);
+            
+    
+            var marker_32ff431f0f9428ccf5274031366050a3 = L.marker(
+                [-25.373126618668195, -49.2585758192884],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_652c243f3c06d00972a62a8076024df5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e6000e1dff2e00c47020b55492e3bb67 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_33b87c1caf322e34da8a2515a3445f6d = $(`<div id="html_33b87c1caf322e34da8a2515a3445f6d" style="width: 100.0%; height: 100.0%;">Cliente: ROSANGELA NASCIMENTO LTDA<br>Ordem: 25</div>`)[0];
+                popup_e6000e1dff2e00c47020b55492e3bb67.setContent(html_33b87c1caf322e34da8a2515a3445f6d);
+            
+        
+
+        marker_32ff431f0f9428ccf5274031366050a3.bindPopup(popup_e6000e1dff2e00c47020b55492e3bb67)
+        ;
+
+        
+    
+    
+            marker_32ff431f0f9428ccf5274031366050a3.bindTooltip(
+                `<div>
+                     Parada 25
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_32ff431f0f9428ccf5274031366050a3.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_32ff431f0f9428ccf5274031366050a3.setIcon(icon_652c243f3c06d00972a62a8076024df5);
+            
+    
+            var marker_5508793952e16577cad26a5c84127bba = L.marker(
+                [-25.37166500564453, -49.256971074063614],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_6a8e76da3ddf1fa4ddbcabb83b5e597e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_45ac185619193c115a2edc9f81de380f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c489c49ad069bdd75dd8585e36e34e61 = $(`<div id="html_c489c49ad069bdd75dd8585e36e34e61" style="width: 100.0%; height: 100.0%;">Cliente: TEREZINHA NASCIMENTO NOWAK<br>Ordem: 26</div>`)[0];
+                popup_45ac185619193c115a2edc9f81de380f.setContent(html_c489c49ad069bdd75dd8585e36e34e61);
+            
+        
+
+        marker_5508793952e16577cad26a5c84127bba.bindPopup(popup_45ac185619193c115a2edc9f81de380f)
+        ;
+
+        
+    
+    
+            marker_5508793952e16577cad26a5c84127bba.bindTooltip(
+                `<div>
+                     Parada 26
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_5508793952e16577cad26a5c84127bba.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5508793952e16577cad26a5c84127bba.setIcon(icon_6a8e76da3ddf1fa4ddbcabb83b5e597e);
+            
+    
+            var marker_cec3c59b4b3b522fdde57fc59dff2299 = L.marker(
+                [-25.37384134919241, -49.2681663997831],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_dcb06f79f26abec243ab8b2b3197ea45 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9efafc8e0a7adefe7d0fc2625c91f989 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_da26372b939723e67cef2b13c540ed70 = $(`<div id="html_da26372b939723e67cef2b13c540ed70" style="width: 100.0%; height: 100.0%;">Cliente: RESTAURANTE DO CHEFE ME<br>Ordem: 27</div>`)[0];
+                popup_9efafc8e0a7adefe7d0fc2625c91f989.setContent(html_da26372b939723e67cef2b13c540ed70);
+            
+        
+
+        marker_cec3c59b4b3b522fdde57fc59dff2299.bindPopup(popup_9efafc8e0a7adefe7d0fc2625c91f989)
+        ;
+
+        
+    
+    
+            marker_cec3c59b4b3b522fdde57fc59dff2299.bindTooltip(
+                `<div>
+                     Parada 27
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_cec3c59b4b3b522fdde57fc59dff2299.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_cec3c59b4b3b522fdde57fc59dff2299.setIcon(icon_dcb06f79f26abec243ab8b2b3197ea45);
+            
+    
+            var marker_6c9c9b8adc38954c8c8da60af4aa8a8f = L.marker(
+                [-25.382489977483598, -49.257282148114236],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_a677d11de83f241711c1b82c50835eda = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c4762914ac388e836e95ec38e9e691f9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_013c44df54157ccf1e04cd456ea1b4aa = $(`<div id="html_013c44df54157ccf1e04cd456ea1b4aa" style="width: 100.0%; height: 100.0%;">Cliente: EMPORIO DO VALE<br>Ordem: 28</div>`)[0];
+                popup_c4762914ac388e836e95ec38e9e691f9.setContent(html_013c44df54157ccf1e04cd456ea1b4aa);
+            
+        
+
+        marker_6c9c9b8adc38954c8c8da60af4aa8a8f.bindPopup(popup_c4762914ac388e836e95ec38e9e691f9)
+        ;
+
+        
+    
+    
+            marker_6c9c9b8adc38954c8c8da60af4aa8a8f.bindTooltip(
+                `<div>
+                     Parada 28
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_6c9c9b8adc38954c8c8da60af4aa8a8f.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_6c9c9b8adc38954c8c8da60af4aa8a8f.setIcon(icon_a677d11de83f241711c1b82c50835eda);
+            
+    
+            var marker_1e10480f73dbe13fce2769da6488652a = L.marker(
+                [-25.384075445288254, -49.248400839053524],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_b717ecf323b177a623b138c8bf96f665 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e223412ee5e26d858e8ea7d871740cee = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c0c44b8ba71a242fd91f21d23f139176 = $(`<div id="html_c0c44b8ba71a242fd91f21d23f139176" style="width: 100.0%; height: 100.0%;">Cliente: PASTELARIA DO CHEFE<br>Ordem: 29</div>`)[0];
+                popup_e223412ee5e26d858e8ea7d871740cee.setContent(html_c0c44b8ba71a242fd91f21d23f139176);
+            
+        
+
+        marker_1e10480f73dbe13fce2769da6488652a.bindPopup(popup_e223412ee5e26d858e8ea7d871740cee)
+        ;
+
+        
+    
+    
+            marker_1e10480f73dbe13fce2769da6488652a.bindTooltip(
+                `<div>
+                     Parada 29
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_1e10480f73dbe13fce2769da6488652a.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_1e10480f73dbe13fce2769da6488652a.setIcon(icon_b717ecf323b177a623b138c8bf96f665);
+            
+    
+            var marker_2f67797ab16b19ff103120cd61c78ec7 = L.marker(
+                [-25.386972405952125, -49.24964528008029],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_60ccfe5477e52dae55c0f9281920bc4c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_999ca20d2e1d8d907ac8f2e6c6cc627a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_183708765b7cb665b294f31a0fd39f12 = $(`<div id="html_183708765b7cb665b294f31a0fd39f12" style="width: 100.0%; height: 100.0%;">Cliente: HAMBURGUERIA NOVA ERA<br>Ordem: 30</div>`)[0];
+                popup_999ca20d2e1d8d907ac8f2e6c6cc627a.setContent(html_183708765b7cb665b294f31a0fd39f12);
+            
+        
+
+        marker_2f67797ab16b19ff103120cd61c78ec7.bindPopup(popup_999ca20d2e1d8d907ac8f2e6c6cc627a)
+        ;
+
+        
+    
+    
+            marker_2f67797ab16b19ff103120cd61c78ec7.bindTooltip(
+                `<div>
+                     Parada 30
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_2f67797ab16b19ff103120cd61c78ec7.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_2f67797ab16b19ff103120cd61c78ec7.setIcon(icon_60ccfe5477e52dae55c0f9281920bc4c);
+            
+    
+            var marker_16ee9c3d438bc15bdfce1be659217ddd = L.marker(
+                [-25.388208715773672, -49.24939985675315],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_03e178090fb009f6ad411a1476171118 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1681f8ea907227dcbd75cceb550908e7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7cfd7fbc822debe86da824303dbd2fbb = $(`<div id="html_7cfd7fbc822debe86da824303dbd2fbb" style="width: 100.0%; height: 100.0%;">Cliente: JOSE OLIVEIRA EPP<br>Ordem: 31</div>`)[0];
+                popup_1681f8ea907227dcbd75cceb550908e7.setContent(html_7cfd7fbc822debe86da824303dbd2fbb);
+            
+        
+
+        marker_16ee9c3d438bc15bdfce1be659217ddd.bindPopup(popup_1681f8ea907227dcbd75cceb550908e7)
+        ;
+
+        
+    
+    
+            marker_16ee9c3d438bc15bdfce1be659217ddd.bindTooltip(
+                `<div>
+                     Parada 31
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_16ee9c3d438bc15bdfce1be659217ddd.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_16ee9c3d438bc15bdfce1be659217ddd.setIcon(icon_03e178090fb009f6ad411a1476171118);
+            
+    
+            var marker_1181a34221e99d2a2bd46b9fe6ad6a91 = L.marker(
+                [-25.388545787964958, -49.25035124642917],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_6c414b7e28e71a24e0844a50b5ca0f09 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fc6215c1abe00eee9aca58bbddb4c5f5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cdca51582e8ce9c8fcd9608be53b6d00 = $(`<div id="html_cdca51582e8ce9c8fcd9608be53b6d00" style="width: 100.0%; height: 100.0%;">Cliente: FABIO SANTOS LTDA<br>Ordem: 32</div>`)[0];
+                popup_fc6215c1abe00eee9aca58bbddb4c5f5.setContent(html_cdca51582e8ce9c8fcd9608be53b6d00);
+            
+        
+
+        marker_1181a34221e99d2a2bd46b9fe6ad6a91.bindPopup(popup_fc6215c1abe00eee9aca58bbddb4c5f5)
+        ;
+
+        
+    
+    
+            marker_1181a34221e99d2a2bd46b9fe6ad6a91.bindTooltip(
+                `<div>
+                     Parada 32
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_1181a34221e99d2a2bd46b9fe6ad6a91.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_1181a34221e99d2a2bd46b9fe6ad6a91.setIcon(icon_6c414b7e28e71a24e0844a50b5ca0f09);
+            
+    
+            var marker_ab884d249165349cef655740ffa0d92e = L.marker(
+                [-25.39067192691583, -49.24630324710124],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_70aafe65a08764c38da827724ebe3727 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_457567deaea69b362624f39957aa3814 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a6ce1d734e9565f8090fb27c70ef66d = $(`<div id="html_0a6ce1d734e9565f8090fb27c70ef66d" style="width: 100.0%; height: 100.0%;">Cliente: CARLOS MULLER LTDA<br>Ordem: 33</div>`)[0];
+                popup_457567deaea69b362624f39957aa3814.setContent(html_0a6ce1d734e9565f8090fb27c70ef66d);
+            
+        
+
+        marker_ab884d249165349cef655740ffa0d92e.bindPopup(popup_457567deaea69b362624f39957aa3814)
+        ;
+
+        
+    
+    
+            marker_ab884d249165349cef655740ffa0d92e.bindTooltip(
+                `<div>
+                     Parada 33
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_ab884d249165349cef655740ffa0d92e.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_ab884d249165349cef655740ffa0d92e.setIcon(icon_70aafe65a08764c38da827724ebe3727);
+            
+    
+            var marker_f80120857fd32fa7215f72f402e2f54f = L.marker(
+                [-25.392788117779684, -49.24655565318418],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_e6a9321ab779f2e02ce59d6d56b1f566 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_18547637ddfd99e5b2964e01b4e3b175 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_03a6838f17d35963aeefb4e7dab8c89a = $(`<div id="html_03a6838f17d35963aeefb4e7dab8c89a" style="width: 100.0%; height: 100.0%;">Cliente: LUCIANA NASCIMENTO EPP<br>Ordem: 34</div>`)[0];
+                popup_18547637ddfd99e5b2964e01b4e3b175.setContent(html_03a6838f17d35963aeefb4e7dab8c89a);
+            
+        
+
+        marker_f80120857fd32fa7215f72f402e2f54f.bindPopup(popup_18547637ddfd99e5b2964e01b4e3b175)
+        ;
+
+        
+    
+    
+            marker_f80120857fd32fa7215f72f402e2f54f.bindTooltip(
+                `<div>
+                     Parada 34
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_f80120857fd32fa7215f72f402e2f54f.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f80120857fd32fa7215f72f402e2f54f.setIcon(icon_e6a9321ab779f2e02ce59d6d56b1f566);
+            
+    
+            var marker_d6038a1a60be7e527cbb793d760cae9f = L.marker(
+                [-25.393171819315384, -49.24700976718721],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_2f8d7f037c5ff3c52ab3c2b2790e025e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f934e461734181c0b3c6f1f4245446c8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f8c99c46d4ff8489f88e30582b6fe729 = $(`<div id="html_f8c99c46d4ff8489f88e30582b6fe729" style="width: 100.0%; height: 100.0%;">Cliente: RESTAURANTE ARAUCARIA ME<br>Ordem: 35</div>`)[0];
+                popup_f934e461734181c0b3c6f1f4245446c8.setContent(html_f8c99c46d4ff8489f88e30582b6fe729);
+            
+        
+
+        marker_d6038a1a60be7e527cbb793d760cae9f.bindPopup(popup_f934e461734181c0b3c6f1f4245446c8)
+        ;
+
+        
+    
+    
+            marker_d6038a1a60be7e527cbb793d760cae9f.bindTooltip(
+                `<div>
+                     Parada 35
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_d6038a1a60be7e527cbb793d760cae9f.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d6038a1a60be7e527cbb793d760cae9f.setIcon(icon_2f8d7f037c5ff3c52ab3c2b2790e025e);
+            
+    
+            var marker_75c610871f5532b8238349a2eb154933 = L.marker(
+                [-25.39422428550587, -49.24571611504325],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_0c5cabf507930b25125b335889e63780 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e6c8f10cf9c82825014b6fd44f799ce1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dced1892ede6621153e5d2c62a4bc60b = $(`<div id="html_dced1892ede6621153e5d2c62a4bc60b" style="width: 100.0%; height: 100.0%;">Cliente: CHURRASCARIA ESQUINA LTDA<br>Ordem: 36</div>`)[0];
+                popup_e6c8f10cf9c82825014b6fd44f799ce1.setContent(html_dced1892ede6621153e5d2c62a4bc60b);
+            
+        
+
+        marker_75c610871f5532b8238349a2eb154933.bindPopup(popup_e6c8f10cf9c82825014b6fd44f799ce1)
+        ;
+
+        
+    
+    
+            marker_75c610871f5532b8238349a2eb154933.bindTooltip(
+                `<div>
+                     Parada 36
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_75c610871f5532b8238349a2eb154933.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_75c610871f5532b8238349a2eb154933.setIcon(icon_0c5cabf507930b25125b335889e63780);
+            
+    
+            var marker_859b5c3442cf16945aedc5bd8333514b = L.marker(
+                [-25.393768210418177, -49.24393984799985],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_d08de8f5e29d41db4f98cdce640f68e3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2fb58a3148911bf10031ddf55402de2a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_38b2530d9fee390893a96625c417b0e1 = $(`<div id="html_38b2530d9fee390893a96625c417b0e1" style="width: 100.0%; height: 100.0%;">Cliente: CONFEITARIA PRACA ME<br>Ordem: 37</div>`)[0];
+                popup_2fb58a3148911bf10031ddf55402de2a.setContent(html_38b2530d9fee390893a96625c417b0e1);
+            
+        
+
+        marker_859b5c3442cf16945aedc5bd8333514b.bindPopup(popup_2fb58a3148911bf10031ddf55402de2a)
+        ;
+
+        
+    
+    
+            marker_859b5c3442cf16945aedc5bd8333514b.bindTooltip(
+                `<div>
+                     Parada 37
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_859b5c3442cf16945aedc5bd8333514b.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_859b5c3442cf16945aedc5bd8333514b.setIcon(icon_d08de8f5e29d41db4f98cdce640f68e3);
+            
+    
+            var marker_f9af2c9d256e3f37eed9ac4b78715ba3 = L.marker(
+                [-25.397212212422637, -49.242651284276995],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_37efae403cc377530b7c0a7a3e64777c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2afb7bedf80cb98b6911873afb6f1972 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c147ae8cb85f5d8b99981f7d178b6bdb = $(`<div id="html_c147ae8cb85f5d8b99981f7d178b6bdb" style="width: 100.0%; height: 100.0%;">Cliente: ANA MARTINS COSTA<br>Ordem: 38</div>`)[0];
+                popup_2afb7bedf80cb98b6911873afb6f1972.setContent(html_c147ae8cb85f5d8b99981f7d178b6bdb);
+            
+        
+
+        marker_f9af2c9d256e3f37eed9ac4b78715ba3.bindPopup(popup_2afb7bedf80cb98b6911873afb6f1972)
+        ;
+
+        
+    
+    
+            marker_f9af2c9d256e3f37eed9ac4b78715ba3.bindTooltip(
+                `<div>
+                     Parada 38
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_f9af2c9d256e3f37eed9ac4b78715ba3.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f9af2c9d256e3f37eed9ac4b78715ba3.setIcon(icon_37efae403cc377530b7c0a7a3e64777c);
+            
+    
+            var marker_3594ff2bcd22564c02132ab2ad387c24 = L.marker(
+                [-25.400174153284148, -49.24274911756988],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_76257ad85c6e082a8f7b678f1d010edb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a7013122123cdb3c449bff2a7b701a04 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_29a82d1615564d7da184174c315bf0f0 = $(`<div id="html_29a82d1615564d7da184174c315bf0f0" style="width: 100.0%; height: 100.0%;">Cliente: MARIA ALMEIDA ME<br>Ordem: 39</div>`)[0];
+                popup_a7013122123cdb3c449bff2a7b701a04.setContent(html_29a82d1615564d7da184174c315bf0f0);
+            
+        
+
+        marker_3594ff2bcd22564c02132ab2ad387c24.bindPopup(popup_a7013122123cdb3c449bff2a7b701a04)
+        ;
+
+        
+    
+    
+            marker_3594ff2bcd22564c02132ab2ad387c24.bindTooltip(
+                `<div>
+                     Parada 39
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_3594ff2bcd22564c02132ab2ad387c24.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_3594ff2bcd22564c02132ab2ad387c24.setIcon(icon_76257ad85c6e082a8f7b678f1d010edb);
+            
+    
+            var marker_aa0c6b16b8c7bede8ca10278562997d5 = L.marker(
+                [-25.402621263597737, -49.23981253534939],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_3466f68f8331c41cf1b1d96d510dba17 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_279a953c202e798699a317c9f7fca26c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_793a33bec03a91174264e930c13d4800 = $(`<div id="html_793a33bec03a91174264e930c13d4800" style="width: 100.0%; height: 100.0%;">Cliente: EDUARDO ARAUJO ME<br>Ordem: 40</div>`)[0];
+                popup_279a953c202e798699a317c9f7fca26c.setContent(html_793a33bec03a91174264e930c13d4800);
+            
+        
+
+        marker_aa0c6b16b8c7bede8ca10278562997d5.bindPopup(popup_279a953c202e798699a317c9f7fca26c)
+        ;
+
+        
+    
+    
+            marker_aa0c6b16b8c7bede8ca10278562997d5.bindTooltip(
+                `<div>
+                     Parada 40
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_aa0c6b16b8c7bede8ca10278562997d5.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_aa0c6b16b8c7bede8ca10278562997d5.setIcon(icon_3466f68f8331c41cf1b1d96d510dba17);
+            
+    
+            var marker_847cedad943fc3ba68a9a9514c1ab35d = L.marker(
+                [-25.399445561173785, -49.23768336300266],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_f4c9dbe7c94a9819d4fefe6cbea21d65 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f89cb1207e67248f919ff38c2bf477eb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_71a30b2ac54674e657eca9504d52401f = $(`<div id="html_71a30b2ac54674e657eca9504d52401f" style="width: 100.0%; height: 100.0%;">Cliente: PIZZARIA NOVA ERA ME<br>Ordem: 41</div>`)[0];
+                popup_f89cb1207e67248f919ff38c2bf477eb.setContent(html_71a30b2ac54674e657eca9504d52401f);
+            
+        
+
+        marker_847cedad943fc3ba68a9a9514c1ab35d.bindPopup(popup_f89cb1207e67248f919ff38c2bf477eb)
+        ;
+
+        
+    
+    
+            marker_847cedad943fc3ba68a9a9514c1ab35d.bindTooltip(
+                `<div>
+                     Parada 41
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_847cedad943fc3ba68a9a9514c1ab35d.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_847cedad943fc3ba68a9a9514c1ab35d.setIcon(icon_f4c9dbe7c94a9819d4fefe6cbea21d65);
+            
+    
+            var marker_5d84119b28f438f2c48c9f9689f62743 = L.marker(
+                [-25.398019893661065, -49.23812214768523],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_ee047e99d5cd9cac743fa8971c82d0fe = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_59cb92e735e2ce25203c090501c55282 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0628423426eae8c7faae109f4790d022 = $(`<div id="html_0628423426eae8c7faae109f4790d022" style="width: 100.0%; height: 100.0%;">Cliente: LANCHONETE TRADICAO LTDA ME<br>Ordem: 42</div>`)[0];
+                popup_59cb92e735e2ce25203c090501c55282.setContent(html_0628423426eae8c7faae109f4790d022);
+            
+        
+
+        marker_5d84119b28f438f2c48c9f9689f62743.bindPopup(popup_59cb92e735e2ce25203c090501c55282)
+        ;
+
+        
+    
+    
+            marker_5d84119b28f438f2c48c9f9689f62743.bindTooltip(
+                `<div>
+                     Parada 42
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_5d84119b28f438f2c48c9f9689f62743.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5d84119b28f438f2c48c9f9689f62743.setIcon(icon_ee047e99d5cd9cac743fa8971c82d0fe);
+            
+    
+            var marker_beb41b5bf200f3364567c53cd7397796 = L.marker(
+                [-25.397390181135187, -49.23610997865906],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_cfb446cfe2d8a5977aecc7c4383bb84e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_61dc62961c0e3c88b583c4db7898ee74 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9ed43f33bc7e70350495614b55bc8f3c = $(`<div id="html_9ed43f33bc7e70350495614b55bc8f3c" style="width: 100.0%; height: 100.0%;">Cliente: LUCIA CARVALHO LTDA<br>Ordem: 43</div>`)[0];
+                popup_61dc62961c0e3c88b583c4db7898ee74.setContent(html_9ed43f33bc7e70350495614b55bc8f3c);
+            
+        
+
+        marker_beb41b5bf200f3364567c53cd7397796.bindPopup(popup_61dc62961c0e3c88b583c4db7898ee74)
+        ;
+
+        
+    
+    
+            marker_beb41b5bf200f3364567c53cd7397796.bindTooltip(
+                `<div>
+                     Parada 43
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_beb41b5bf200f3364567c53cd7397796.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_beb41b5bf200f3364567c53cd7397796.setIcon(icon_cfb446cfe2d8a5977aecc7c4383bb84e);
+            
+    
+            var marker_3ac7a7ad8a884610eef40efb6395bb16 = L.marker(
+                [-25.391757255037383, -49.2367649852799],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_26fb5c2ef26c3dcb9d37f6a3824131f0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ef6e97b69a040bd17c81c0eb6b0e08d1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c1d3555ccb539eec23a42ff617e13801 = $(`<div id="html_c1d3555ccb539eec23a42ff617e13801" style="width: 100.0%; height: 100.0%;">Cliente: PASTELARIA DO CHEFE EIRELI<br>Ordem: 44</div>`)[0];
+                popup_ef6e97b69a040bd17c81c0eb6b0e08d1.setContent(html_c1d3555ccb539eec23a42ff617e13801);
+            
+        
+
+        marker_3ac7a7ad8a884610eef40efb6395bb16.bindPopup(popup_ef6e97b69a040bd17c81c0eb6b0e08d1)
+        ;
+
+        
+    
+    
+            marker_3ac7a7ad8a884610eef40efb6395bb16.bindTooltip(
+                `<div>
+                     Parada 44
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_3ac7a7ad8a884610eef40efb6395bb16.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_3ac7a7ad8a884610eef40efb6395bb16.setIcon(icon_26fb5c2ef26c3dcb9d37f6a3824131f0);
+            
+    
+            var marker_f5b95d54a30448d3bbf2db67d0f25b31 = L.marker(
+                [-25.391574817350254, -49.23864623506074],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_838f74513d574802f416406cb685c3aa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dfb8bc0cc11173cc6f74221cb3a21b34 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ba70c2283caa0f4d64f75c99c2af9626 = $(`<div id="html_ba70c2283caa0f4d64f75c99c2af9626" style="width: 100.0%; height: 100.0%;">Cliente: SANDRA BORGES SILVA<br>Ordem: 45</div>`)[0];
+                popup_dfb8bc0cc11173cc6f74221cb3a21b34.setContent(html_ba70c2283caa0f4d64f75c99c2af9626);
+            
+        
+
+        marker_f5b95d54a30448d3bbf2db67d0f25b31.bindPopup(popup_dfb8bc0cc11173cc6f74221cb3a21b34)
+        ;
+
+        
+    
+    
+            marker_f5b95d54a30448d3bbf2db67d0f25b31.bindTooltip(
+                `<div>
+                     Parada 45
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_f5b95d54a30448d3bbf2db67d0f25b31.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f5b95d54a30448d3bbf2db67d0f25b31.setIcon(icon_838f74513d574802f416406cb685c3aa);
+            
+    
+            var marker_1e0736a7c786aa9dd97aa3f28362124c = L.marker(
+                [-25.39141580504853, -49.240016629946],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_2ee29352b51181a4e4b522f803fc6cbc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_81a279e17cb810acce3d0cd54ac1ba66 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1521c72c94b1ccb1540a61f865f109e5 = $(`<div id="html_1521c72c94b1ccb1540a61f865f109e5" style="width: 100.0%; height: 100.0%;">Cliente: CLAUDIA ZANETTI LTDA<br>Ordem: 46</div>`)[0];
+                popup_81a279e17cb810acce3d0cd54ac1ba66.setContent(html_1521c72c94b1ccb1540a61f865f109e5);
+            
+        
+
+        marker_1e0736a7c786aa9dd97aa3f28362124c.bindPopup(popup_81a279e17cb810acce3d0cd54ac1ba66)
+        ;
+
+        
+    
+    
+            marker_1e0736a7c786aa9dd97aa3f28362124c.bindTooltip(
+                `<div>
+                     Parada 46
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_1e0736a7c786aa9dd97aa3f28362124c.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_1e0736a7c786aa9dd97aa3f28362124c.setIcon(icon_2ee29352b51181a4e4b522f803fc6cbc);
+            
+    
+            var marker_0527ec52fcd46403ada094f7e571bdd5 = L.marker(
+                [-25.390091076920516, -49.238593426721415],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_d2a6396cfac54f5d9b9ee983c7bed8eb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_62a89a1ef5a7a992e29950373eb70d3c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e3fedf3d98b7ea1f742fb0e6d014da00 = $(`<div id="html_e3fedf3d98b7ea1f742fb0e6d014da00" style="width: 100.0%; height: 100.0%;">Cliente: FERNANDA WISNIEWSKI MULLER<br>Ordem: 47</div>`)[0];
+                popup_62a89a1ef5a7a992e29950373eb70d3c.setContent(html_e3fedf3d98b7ea1f742fb0e6d014da00);
+            
+        
+
+        marker_0527ec52fcd46403ada094f7e571bdd5.bindPopup(popup_62a89a1ef5a7a992e29950373eb70d3c)
+        ;
+
+        
+    
+    
+            marker_0527ec52fcd46403ada094f7e571bdd5.bindTooltip(
+                `<div>
+                     Parada 47
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_0527ec52fcd46403ada094f7e571bdd5.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_0527ec52fcd46403ada094f7e571bdd5.setIcon(icon_d2a6396cfac54f5d9b9ee983c7bed8eb);
+            
+    
+            var marker_631b5a39b0f99b727d58b574b9985ee2 = L.marker(
+                [-25.391109791489807, -49.23433716432416],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_70c4e798ed5dfde7501a34743a415257 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b7191d9dc8cda82761c7a1991eb05e0a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d04ac7bcaa25256362a70b39412c6802 = $(`<div id="html_d04ac7bcaa25256362a70b39412c6802" style="width: 100.0%; height: 100.0%;">Cliente: HAMBURGUERIA SABOR EIRELI<br>Ordem: 48</div>`)[0];
+                popup_b7191d9dc8cda82761c7a1991eb05e0a.setContent(html_d04ac7bcaa25256362a70b39412c6802);
+            
+        
+
+        marker_631b5a39b0f99b727d58b574b9985ee2.bindPopup(popup_b7191d9dc8cda82761c7a1991eb05e0a)
+        ;
+
+        
+    
+    
+            marker_631b5a39b0f99b727d58b574b9985ee2.bindTooltip(
+                `<div>
+                     Parada 48
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_631b5a39b0f99b727d58b574b9985ee2.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_631b5a39b0f99b727d58b574b9985ee2.setIcon(icon_70c4e798ed5dfde7501a34743a415257);
+            
+    
+            var marker_f80aba7b4b735a9408bccb953578f435 = L.marker(
+                [-25.385477922708073, -49.23414309446006],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_8a5a6239708e367aa69ca58fc687d19c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a5b488d4e118fb0c8689067ad51adce2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cfa5664b06835b72f118f8e2f46d774a = $(`<div id="html_cfa5664b06835b72f118f8e2f46d774a" style="width: 100.0%; height: 100.0%;">Cliente: PADARIA MINEIRO LTDA ME<br>Ordem: 49</div>`)[0];
+                popup_a5b488d4e118fb0c8689067ad51adce2.setContent(html_cfa5664b06835b72f118f8e2f46d774a);
+            
+        
+
+        marker_f80aba7b4b735a9408bccb953578f435.bindPopup(popup_a5b488d4e118fb0c8689067ad51adce2)
+        ;
+
+        
+    
+    
+            marker_f80aba7b4b735a9408bccb953578f435.bindTooltip(
+                `<div>
+                     Parada 49
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_f80aba7b4b735a9408bccb953578f435.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f80aba7b4b735a9408bccb953578f435.setIcon(icon_8a5a6239708e367aa69ca58fc687d19c);
+            
+    
+            var marker_d724ab466317a4ce5415dfcb02d4d216 = L.marker(
+                [-25.386580191493326, -49.2456971380248],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_b945fa547ddf3c0493870e0ccbb7bd2f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_402e0f0a0b92636fa7936c169a63d364 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1594ead27579bf24d7802e447096dcd2 = $(`<div id="html_1594ead27579bf24d7802e447096dcd2" style="width: 100.0%; height: 100.0%;">Cliente: SERGIO NASCIMENTO EPP<br>Ordem: 50</div>`)[0];
+                popup_402e0f0a0b92636fa7936c169a63d364.setContent(html_1594ead27579bf24d7802e447096dcd2);
+            
+        
+
+        marker_d724ab466317a4ce5415dfcb02d4d216.bindPopup(popup_402e0f0a0b92636fa7936c169a63d364)
+        ;
+
+        
+    
+    
+            marker_d724ab466317a4ce5415dfcb02d4d216.bindTooltip(
+                `<div>
+                     Parada 50
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_d724ab466317a4ce5415dfcb02d4d216.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d724ab466317a4ce5415dfcb02d4d216.setIcon(icon_b945fa547ddf3c0493870e0ccbb7bd2f);
+            
+    
+            var marker_f0842be4768e672b7715e22c5f32a6ee = L.marker(
+                [-25.395156574519657, -49.25052279157877],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_c8c3fbb11a153c6d7c3f53226c1c1d42 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_15ea7b098fe916be45e209e75ff81914 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4f2c4d59004770f3d008c452be72bad0 = $(`<div id="html_4f2c4d59004770f3d008c452be72bad0" style="width: 100.0%; height: 100.0%;">Cliente: PIZZARIA TRADICAO LTDA<br>Ordem: 51</div>`)[0];
+                popup_15ea7b098fe916be45e209e75ff81914.setContent(html_4f2c4d59004770f3d008c452be72bad0);
+            
+        
+
+        marker_f0842be4768e672b7715e22c5f32a6ee.bindPopup(popup_15ea7b098fe916be45e209e75ff81914)
+        ;
+
+        
+    
+    
+            marker_f0842be4768e672b7715e22c5f32a6ee.bindTooltip(
+                `<div>
+                     Parada 51
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_f0842be4768e672b7715e22c5f32a6ee.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f0842be4768e672b7715e22c5f32a6ee.setIcon(icon_c8c3fbb11a153c6d7c3f53226c1c1d42);
+            
+    
+            var marker_baefd722d694f256a8a871c3ac129f6c = L.marker(
+                [-25.3946745273871, -49.25288976867091],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_fed093348b8d3c9dbe545f72e0b09102 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_719fb3e154a5bbd0d13999f6f49745fb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9a2e8a157a261084d7abab6ce395b287 = $(`<div id="html_9a2e8a157a261084d7abab6ce395b287" style="width: 100.0%; height: 100.0%;">Cliente: TEREZINHA CARVALHO ZANETTI<br>Ordem: 52</div>`)[0];
+                popup_719fb3e154a5bbd0d13999f6f49745fb.setContent(html_9a2e8a157a261084d7abab6ce395b287);
+            
+        
+
+        marker_baefd722d694f256a8a871c3ac129f6c.bindPopup(popup_719fb3e154a5bbd0d13999f6f49745fb)
+        ;
+
+        
+    
+    
+            marker_baefd722d694f256a8a871c3ac129f6c.bindTooltip(
+                `<div>
+                     Parada 52
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_baefd722d694f256a8a871c3ac129f6c.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_baefd722d694f256a8a871c3ac129f6c.setIcon(icon_fed093348b8d3c9dbe545f72e0b09102);
+            
+    
+            var marker_91f9db70c7c75c7604c02476bfe161a6 = L.marker(
+                [-25.397946341381733, -49.2522173555621],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_961be6f8b251dae35388fb900d9820c4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e53370a39c64ccf272454ea7c8b6e7f5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e3be32de7942ccd14f5953a3b2bcf3c1 = $(`<div id="html_e3be32de7942ccd14f5953a3b2bcf3c1" style="width: 100.0%; height: 100.0%;">Cliente: ROBERTO OLIVEIRA ME<br>Ordem: 53</div>`)[0];
+                popup_e53370a39c64ccf272454ea7c8b6e7f5.setContent(html_e3be32de7942ccd14f5953a3b2bcf3c1);
+            
+        
+
+        marker_91f9db70c7c75c7604c02476bfe161a6.bindPopup(popup_e53370a39c64ccf272454ea7c8b6e7f5)
+        ;
+
+        
+    
+    
+            marker_91f9db70c7c75c7604c02476bfe161a6.bindTooltip(
+                `<div>
+                     Parada 53
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_91f9db70c7c75c7604c02476bfe161a6.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_91f9db70c7c75c7604c02476bfe161a6.setIcon(icon_961be6f8b251dae35388fb900d9820c4);
+            
+    
+            var marker_5f8d544ab225fb5923b58c818f1ff376 = L.marker(
+                [-25.399650032722832, -49.25758947182111],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_7110fa15b6b871873fbcceb9a1f3e917 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9774906bf58d2bc6ff3be0c6bfda82b7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d55eea0fba81104ae9c91b1ffefd52cb = $(`<div id="html_d55eea0fba81104ae9c91b1ffefd52cb" style="width: 100.0%; height: 100.0%;">Cliente: PASTELARIA ARAUCARIA EIRELI<br>Ordem: 54</div>`)[0];
+                popup_9774906bf58d2bc6ff3be0c6bfda82b7.setContent(html_d55eea0fba81104ae9c91b1ffefd52cb);
+            
+        
+
+        marker_5f8d544ab225fb5923b58c818f1ff376.bindPopup(popup_9774906bf58d2bc6ff3be0c6bfda82b7)
+        ;
+
+        
+    
+    
+            marker_5f8d544ab225fb5923b58c818f1ff376.bindTooltip(
+                `<div>
+                     Parada 54
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_5f8d544ab225fb5923b58c818f1ff376.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5f8d544ab225fb5923b58c818f1ff376.setIcon(icon_7110fa15b6b871873fbcceb9a1f3e917);
+            
+    
+            var marker_7d7e7096b8dc2040470d23abe5b97bca = L.marker(
+                [-25.399304772257516, -49.25898818488957],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_07f197ba8c386a87292c0293d0f1acdb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c7c2b2884bf9899ffdc6bf4967adfe5f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f6e495bd1ceaaed3c0fcc68c78e11265 = $(`<div id="html_f6e495bd1ceaaed3c0fcc68c78e11265" style="width: 100.0%; height: 100.0%;">Cliente: PASTELARIA ITALIANA LTDA<br>Ordem: 55</div>`)[0];
+                popup_c7c2b2884bf9899ffdc6bf4967adfe5f.setContent(html_f6e495bd1ceaaed3c0fcc68c78e11265);
+            
+        
+
+        marker_7d7e7096b8dc2040470d23abe5b97bca.bindPopup(popup_c7c2b2884bf9899ffdc6bf4967adfe5f)
+        ;
+
+        
+    
+    
+            marker_7d7e7096b8dc2040470d23abe5b97bca.bindTooltip(
+                `<div>
+                     Parada 55
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_7d7e7096b8dc2040470d23abe5b97bca.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_7d7e7096b8dc2040470d23abe5b97bca.setIcon(icon_07f197ba8c386a87292c0293d0f1acdb);
+            
+    
+            var marker_a641092a7bfe3d992d63083dc5d144e6 = L.marker(
+                [-25.40011718908034, -49.2598270695477],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_efaf465d25519f02fd73409d3f98f3ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fbb9be69922fef5bc2a44196d92fc505 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_01640eed4bf9bd5821660016e36d6c1a = $(`<div id="html_01640eed4bf9bd5821660016e36d6c1a" style="width: 100.0%; height: 100.0%;">Cliente: MERCEARIA ESQUINA<br>Ordem: 56</div>`)[0];
+                popup_fbb9be69922fef5bc2a44196d92fc505.setContent(html_01640eed4bf9bd5821660016e36d6c1a);
+            
+        
+
+        marker_a641092a7bfe3d992d63083dc5d144e6.bindPopup(popup_fbb9be69922fef5bc2a44196d92fc505)
+        ;
+
+        
+    
+    
+            marker_a641092a7bfe3d992d63083dc5d144e6.bindTooltip(
+                `<div>
+                     Parada 56
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_a641092a7bfe3d992d63083dc5d144e6.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_a641092a7bfe3d992d63083dc5d144e6.setIcon(icon_efaf465d25519f02fd73409d3f98f3ef);
+            
+    
+            var marker_c27754e5d63ec9d1e14781b0e3999eea = L.marker(
+                [-25.400392177591026, -49.262078182833804],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_111702ec309581d82f92b9c184e19bee = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c4f2df13535dec2d167e757a6b9c678d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d375031c6a0c066de67b289cd06e8f30 = $(`<div id="html_d375031c6a0c066de67b289cd06e8f30" style="width: 100.0%; height: 100.0%;">Cliente: ADRIANA BORGES LTDA<br>Ordem: 57</div>`)[0];
+                popup_c4f2df13535dec2d167e757a6b9c678d.setContent(html_d375031c6a0c066de67b289cd06e8f30);
+            
+        
+
+        marker_c27754e5d63ec9d1e14781b0e3999eea.bindPopup(popup_c4f2df13535dec2d167e757a6b9c678d)
+        ;
+
+        
+    
+    
+            marker_c27754e5d63ec9d1e14781b0e3999eea.bindTooltip(
+                `<div>
+                     Parada 57
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_c27754e5d63ec9d1e14781b0e3999eea.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_c27754e5d63ec9d1e14781b0e3999eea.setIcon(icon_111702ec309581d82f92b9c184e19bee);
+            
+    
+            var marker_518f31f386c40d0081b1a7703fd6ebe4 = L.marker(
+                [-25.402088488265623, -49.261505114565],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_436fb6314a99bececd8197b796fa78c5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fcc2722b88b9fbaacdb811ec72e959e6 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d631bb26e1e1e160182240ac29953f7a = $(`<div id="html_d631bb26e1e1e160182240ac29953f7a" style="width: 100.0%; height: 100.0%;">Cliente: ROBERTO PILATTI EPP<br>Ordem: 58</div>`)[0];
+                popup_fcc2722b88b9fbaacdb811ec72e959e6.setContent(html_d631bb26e1e1e160182240ac29953f7a);
+            
+        
+
+        marker_518f31f386c40d0081b1a7703fd6ebe4.bindPopup(popup_fcc2722b88b9fbaacdb811ec72e959e6)
+        ;
+
+        
+    
+    
+            marker_518f31f386c40d0081b1a7703fd6ebe4.bindTooltip(
+                `<div>
+                     Parada 58
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_518f31f386c40d0081b1a7703fd6ebe4.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_518f31f386c40d0081b1a7703fd6ebe4.setIcon(icon_436fb6314a99bececd8197b796fa78c5);
+            
+    
+            var marker_d4dca131b9fe35d6e148dd748cf89b05 = L.marker(
+                [-25.403234974689738, -49.26159029017092],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_7807030103f781839b5b754cf352e1a6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a031e08446432946acd5c4015cd87e1a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_8100714a7504e75e771d73c3c8fbf6cd = $(`<div id="html_8100714a7504e75e771d73c3c8fbf6cd" style="width: 100.0%; height: 100.0%;">Cliente: SERGIO WISNIEWSKI EPP<br>Ordem: 59</div>`)[0];
+                popup_a031e08446432946acd5c4015cd87e1a.setContent(html_8100714a7504e75e771d73c3c8fbf6cd);
+            
+        
+
+        marker_d4dca131b9fe35d6e148dd748cf89b05.bindPopup(popup_a031e08446432946acd5c4015cd87e1a)
+        ;
+
+        
+    
+    
+            marker_d4dca131b9fe35d6e148dd748cf89b05.bindTooltip(
+                `<div>
+                     Parada 59
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_d4dca131b9fe35d6e148dd748cf89b05.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d4dca131b9fe35d6e148dd748cf89b05.setIcon(icon_7807030103f781839b5b754cf352e1a6);
+            
+    
+            var marker_34d7138b201f78dc0375b1e09449a0c1 = L.marker(
+                [-25.402796685346516, -49.26289404528092],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_bd0521ad6179c8eebd971ef73d5b1b15 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ad0d3ba875b6f3abe874a3128722931b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c136fbbc7de8c8829b86a07ad6c67e1e = $(`<div id="html_c136fbbc7de8c8829b86a07ad6c67e1e" style="width: 100.0%; height: 100.0%;">Cliente: MERCEARIA ITALIANA EIRELI<br>Ordem: 60</div>`)[0];
+                popup_ad0d3ba875b6f3abe874a3128722931b.setContent(html_c136fbbc7de8c8829b86a07ad6c67e1e);
+            
+        
+
+        marker_34d7138b201f78dc0375b1e09449a0c1.bindPopup(popup_ad0d3ba875b6f3abe874a3128722931b)
+        ;
+
+        
+    
+    
+            marker_34d7138b201f78dc0375b1e09449a0c1.bindTooltip(
+                `<div>
+                     Parada 60
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_34d7138b201f78dc0375b1e09449a0c1.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_34d7138b201f78dc0375b1e09449a0c1.setIcon(icon_bd0521ad6179c8eebd971ef73d5b1b15);
+            
+    
+            var marker_94ccada20139b6d33956a8ac94ca4738 = L.marker(
+                [-25.402878424348646, -49.2636543376957],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_e250c15b98c7bed71f1605dd7bdc0ef3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_cf0e72d95016011c5fb357cb55acb529 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_66f65e5109cab93e07d9419fd0bae2d9 = $(`<div id="html_66f65e5109cab93e07d9419fd0bae2d9" style="width: 100.0%; height: 100.0%;">Cliente: LUCIA PEREIRA SILVA<br>Ordem: 61</div>`)[0];
+                popup_cf0e72d95016011c5fb357cb55acb529.setContent(html_66f65e5109cab93e07d9419fd0bae2d9);
+            
+        
+
+        marker_94ccada20139b6d33956a8ac94ca4738.bindPopup(popup_cf0e72d95016011c5fb357cb55acb529)
+        ;
+
+        
+    
+    
+            marker_94ccada20139b6d33956a8ac94ca4738.bindTooltip(
+                `<div>
+                     Parada 61
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_94ccada20139b6d33956a8ac94ca4738.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_94ccada20139b6d33956a8ac94ca4738.setIcon(icon_e250c15b98c7bed71f1605dd7bdc0ef3);
+            
+    
+            var marker_fcab110c8f2d595f21a677c28d58b311 = L.marker(
+                [-25.40402780895424, -49.26377062785497],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_f8dde97f89d3b299805f2090d9905c88 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_71c8fcca2ecfb6f63b4fdef2053fdd1d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_dd53527c686fe6a7545e46d0a067362b = $(`<div id="html_dd53527c686fe6a7545e46d0a067362b" style="width: 100.0%; height: 100.0%;">Cliente: ROSANGELA RIBEIRO LTDA<br>Ordem: 62</div>`)[0];
+                popup_71c8fcca2ecfb6f63b4fdef2053fdd1d.setContent(html_dd53527c686fe6a7545e46d0a067362b);
+            
+        
+
+        marker_fcab110c8f2d595f21a677c28d58b311.bindPopup(popup_71c8fcca2ecfb6f63b4fdef2053fdd1d)
+        ;
+
+        
+    
+    
+            marker_fcab110c8f2d595f21a677c28d58b311.bindTooltip(
+                `<div>
+                     Parada 62
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_fcab110c8f2d595f21a677c28d58b311.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_fcab110c8f2d595f21a677c28d58b311.setIcon(icon_f8dde97f89d3b299805f2090d9905c88);
+            
+    
+            var marker_6692c8df34a3b679331389b7e9937f2e = L.marker(
+                [-25.405610591173076, -49.263082090091046],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_841b4848f89f6f3b1980d271fed27343 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_db45114e2fb88709a608bd46efc9ee26 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d39a96fe16627b35f072feb6a8342f70 = $(`<div id="html_d39a96fe16627b35f072feb6a8342f70" style="width: 100.0%; height: 100.0%;">Cliente: HAMBURGUERIA MINEIRO<br>Ordem: 63</div>`)[0];
+                popup_db45114e2fb88709a608bd46efc9ee26.setContent(html_d39a96fe16627b35f072feb6a8342f70);
+            
+        
+
+        marker_6692c8df34a3b679331389b7e9937f2e.bindPopup(popup_db45114e2fb88709a608bd46efc9ee26)
+        ;
+
+        
+    
+    
+            marker_6692c8df34a3b679331389b7e9937f2e.bindTooltip(
+                `<div>
+                     Parada 63
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_6692c8df34a3b679331389b7e9937f2e.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_6692c8df34a3b679331389b7e9937f2e.setIcon(icon_841b4848f89f6f3b1980d271fed27343);
+            
+    
+            var marker_5048b953fb7800f845b17ecab2dea5d9 = L.marker(
+                [-25.40622968226841, -49.2638254831721],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_e05bb12fd7bb148fd338282796756083 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4b19dcef901b69adf44d4003820c1bf9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_06b9d900a4c85e55c19cceaad43fe9a4 = $(`<div id="html_06b9d900a4c85e55c19cceaad43fe9a4" style="width: 100.0%; height: 100.0%;">Cliente: PAULO COSTA COSTA<br>Ordem: 64</div>`)[0];
+                popup_4b19dcef901b69adf44d4003820c1bf9.setContent(html_06b9d900a4c85e55c19cceaad43fe9a4);
+            
+        
+
+        marker_5048b953fb7800f845b17ecab2dea5d9.bindPopup(popup_4b19dcef901b69adf44d4003820c1bf9)
+        ;
+
+        
+    
+    
+            marker_5048b953fb7800f845b17ecab2dea5d9.bindTooltip(
+                `<div>
+                     Parada 64
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_5048b953fb7800f845b17ecab2dea5d9.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_5048b953fb7800f845b17ecab2dea5d9.setIcon(icon_e05bb12fd7bb148fd338282796756083);
+            
+    
+            var marker_d60357db01dc264f2dfca56df0d5ab20 = L.marker(
+                [-25.407610003973442, -49.26251873500397],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_8849d30fc189796ba488164bfddc1ae2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_807901ccd7dab4e9087b845965ca99cb = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e0698887fb9e14d5404e6e51b0f3fa82 = $(`<div id="html_e0698887fb9e14d5404e6e51b0f3fa82" style="width: 100.0%; height: 100.0%;">Cliente: PAULO RIBEIRO KOWALSKI<br>Ordem: 65</div>`)[0];
+                popup_807901ccd7dab4e9087b845965ca99cb.setContent(html_e0698887fb9e14d5404e6e51b0f3fa82);
+            
+        
+
+        marker_d60357db01dc264f2dfca56df0d5ab20.bindPopup(popup_807901ccd7dab4e9087b845965ca99cb)
+        ;
+
+        
+    
+    
+            marker_d60357db01dc264f2dfca56df0d5ab20.bindTooltip(
+                `<div>
+                     Parada 65
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_d60357db01dc264f2dfca56df0d5ab20.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d60357db01dc264f2dfca56df0d5ab20.setIcon(icon_8849d30fc189796ba488164bfddc1ae2);
+            
+    
+            var marker_d45117539657711a43d7827d9e68d973 = L.marker(
+                [-25.410774149232342, -49.26057102690155],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_19356c9a66a1cfde170c9ed7ffd935e5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7af7f75f59eb289fe8df9dac26d2ea87 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6a8894cdb7c6fcf21e6cac82485d8bac = $(`<div id="html_6a8894cdb7c6fcf21e6cac82485d8bac" style="width: 100.0%; height: 100.0%;">Cliente: LUCIANA NASCIMENTO PILATTI<br>Ordem: 66</div>`)[0];
+                popup_7af7f75f59eb289fe8df9dac26d2ea87.setContent(html_6a8894cdb7c6fcf21e6cac82485d8bac);
+            
+        
+
+        marker_d45117539657711a43d7827d9e68d973.bindPopup(popup_7af7f75f59eb289fe8df9dac26d2ea87)
+        ;
+
+        
+    
+    
+            marker_d45117539657711a43d7827d9e68d973.bindTooltip(
+                `<div>
+                     Parada 66
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_d45117539657711a43d7827d9e68d973.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_d45117539657711a43d7827d9e68d973.setIcon(icon_19356c9a66a1cfde170c9ed7ffd935e5);
+            
+    
+            var marker_7dc4468fa213a6678d5a1d15c7ab3fba = L.marker(
+                [-25.405076567999508, -49.266446793161165],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_6223c180dfa05b2f5b1f4eb873e7ecbb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f3b5105988de68d83c35e0839962e98e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c57224e223d80e907e87ce24dd562f75 = $(`<div id="html_c57224e223d80e907e87ce24dd562f75" style="width: 100.0%; height: 100.0%;">Cliente: VANESSA MULLER LTDA<br>Ordem: 67</div>`)[0];
+                popup_f3b5105988de68d83c35e0839962e98e.setContent(html_c57224e223d80e907e87ce24dd562f75);
+            
+        
+
+        marker_7dc4468fa213a6678d5a1d15c7ab3fba.bindPopup(popup_f3b5105988de68d83c35e0839962e98e)
+        ;
+
+        
+    
+    
+            marker_7dc4468fa213a6678d5a1d15c7ab3fba.bindTooltip(
+                `<div>
+                     Parada 67
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_7dc4468fa213a6678d5a1d15c7ab3fba.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_7dc4468fa213a6678d5a1d15c7ab3fba.setIcon(icon_6223c180dfa05b2f5b1f4eb873e7ecbb);
+            
+    
+            var marker_98107ac2523c2f36dee49ae0b1b6bc3c = L.marker(
+                [-25.402829606327895, -49.26623418754562],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_87cdd56290911ec10ddb596a2c7e1379 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_60fdadd30eed8ec9851c1345c639e29b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1264cf1e1308bfb1d7234fd8fbd2f2ed = $(`<div id="html_1264cf1e1308bfb1d7234fd8fbd2f2ed" style="width: 100.0%; height: 100.0%;">Cliente: JOAO LIMA ME<br>Ordem: 68</div>`)[0];
+                popup_60fdadd30eed8ec9851c1345c639e29b.setContent(html_1264cf1e1308bfb1d7234fd8fbd2f2ed);
+            
+        
+
+        marker_98107ac2523c2f36dee49ae0b1b6bc3c.bindPopup(popup_60fdadd30eed8ec9851c1345c639e29b)
+        ;
+
+        
+    
+    
+            marker_98107ac2523c2f36dee49ae0b1b6bc3c.bindTooltip(
+                `<div>
+                     Parada 68
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_98107ac2523c2f36dee49ae0b1b6bc3c.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_98107ac2523c2f36dee49ae0b1b6bc3c.setIcon(icon_87cdd56290911ec10ddb596a2c7e1379);
+            
+    
+            var marker_888aa7da19fd4a8ce699d975ff6f232b = L.marker(
+                [-25.402387171438615, -49.266416392999],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_973f8da5265ac8fbf282a0d5a8e08064 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_86b49972b023e7ee5ce9fae350ce4b35 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5d19b30606d793c5051d6494eb297355 = $(`<div id="html_5d19b30606d793c5051d6494eb297355" style="width: 100.0%; height: 100.0%;">Cliente: VANESSA CARVALHO OLIVEIRA<br>Ordem: 69</div>`)[0];
+                popup_86b49972b023e7ee5ce9fae350ce4b35.setContent(html_5d19b30606d793c5051d6494eb297355);
+            
+        
+
+        marker_888aa7da19fd4a8ce699d975ff6f232b.bindPopup(popup_86b49972b023e7ee5ce9fae350ce4b35)
+        ;
+
+        
+    
+    
+            marker_888aa7da19fd4a8ce699d975ff6f232b.bindTooltip(
+                `<div>
+                     Parada 69
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_888aa7da19fd4a8ce699d975ff6f232b.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_888aa7da19fd4a8ce699d975ff6f232b.setIcon(icon_973f8da5265ac8fbf282a0d5a8e08064);
+            
+    
+            var marker_14dab795622cd49775133fe238bdee48 = L.marker(
+                [-25.4014305585539, -49.26447665851014],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_348de7bf293e9894eb2ccf26568bfc42 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a8d532f6735f2c8b46451d8218aedde1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5f24fdff623e50c2d4c606f42d1dae12 = $(`<div id="html_5f24fdff623e50c2d4c606f42d1dae12" style="width: 100.0%; height: 100.0%;">Cliente: ROBERTO GOMES ZANETTI<br>Ordem: 70</div>`)[0];
+                popup_a8d532f6735f2c8b46451d8218aedde1.setContent(html_5f24fdff623e50c2d4c606f42d1dae12);
+            
+        
+
+        marker_14dab795622cd49775133fe238bdee48.bindPopup(popup_a8d532f6735f2c8b46451d8218aedde1)
+        ;
+
+        
+    
+    
+            marker_14dab795622cd49775133fe238bdee48.bindTooltip(
+                `<div>
+                     Parada 70
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_14dab795622cd49775133fe238bdee48.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_14dab795622cd49775133fe238bdee48.setIcon(icon_348de7bf293e9894eb2ccf26568bfc42);
+            
+    
+            var marker_581c13824efdc962c7602cd32436b9ba = L.marker(
+                [-25.3993696796051, -49.26625752454813],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_34fe39ff275394b2d73c6b9b30ae2402 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5a021a7962dfa71841623ff2d0b277a2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7ddb512bf2ab0b0ada393e420c90eab6 = $(`<div id="html_7ddb512bf2ab0b0ada393e420c90eab6" style="width: 100.0%; height: 100.0%;">Cliente: COZINHA INDUSTRIAL DO CHEFE<br>Ordem: 71</div>`)[0];
+                popup_5a021a7962dfa71841623ff2d0b277a2.setContent(html_7ddb512bf2ab0b0ada393e420c90eab6);
+            
+        
+
+        marker_581c13824efdc962c7602cd32436b9ba.bindPopup(popup_5a021a7962dfa71841623ff2d0b277a2)
+        ;
+
+        
+    
+    
+            marker_581c13824efdc962c7602cd32436b9ba.bindTooltip(
+                `<div>
+                     Parada 71
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_581c13824efdc962c7602cd32436b9ba.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_581c13824efdc962c7602cd32436b9ba.setIcon(icon_34fe39ff275394b2d73c6b9b30ae2402);
+            
+    
+            var marker_f1d1fa4da16a4b157f5fb75911f93fd5 = L.marker(
+                [-25.39785363617781, -49.26768787497584],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_4d795e878f79822bdd036bafca6bae99 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d01aa3f9c5ae2f4c8de99dad9b34d6d2 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f5a833e324d3158d9fce1ef40c1fb50c = $(`<div id="html_f5a833e324d3158d9fce1ef40c1fb50c" style="width: 100.0%; height: 100.0%;">Cliente: HAMBURGUERIA ITALIANA<br>Ordem: 72</div>`)[0];
+                popup_d01aa3f9c5ae2f4c8de99dad9b34d6d2.setContent(html_f5a833e324d3158d9fce1ef40c1fb50c);
+            
+        
+
+        marker_f1d1fa4da16a4b157f5fb75911f93fd5.bindPopup(popup_d01aa3f9c5ae2f4c8de99dad9b34d6d2)
+        ;
+
+        
+    
+    
+            marker_f1d1fa4da16a4b157f5fb75911f93fd5.bindTooltip(
+                `<div>
+                     Parada 72
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_f1d1fa4da16a4b157f5fb75911f93fd5.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f1d1fa4da16a4b157f5fb75911f93fd5.setIcon(icon_4d795e878f79822bdd036bafca6bae99);
+            
+    
+            var marker_2fb14d7b4913ea118887392bb9328d6f = L.marker(
+                [-25.400485610994554, -49.26867496934209],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_4d2618c351673d0fafc88cfe2ce9bca3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c79de30f83938d70296d0e79a38f1791 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2c25375db000e300a693fa472baa7d48 = $(`<div id="html_2c25375db000e300a693fa472baa7d48" style="width: 100.0%; height: 100.0%;">Cliente: LUCIA GOMES PILATTI<br>Ordem: 73</div>`)[0];
+                popup_c79de30f83938d70296d0e79a38f1791.setContent(html_2c25375db000e300a693fa472baa7d48);
+            
+        
+
+        marker_2fb14d7b4913ea118887392bb9328d6f.bindPopup(popup_c79de30f83938d70296d0e79a38f1791)
+        ;
+
+        
+    
+    
+            marker_2fb14d7b4913ea118887392bb9328d6f.bindTooltip(
+                `<div>
+                     Parada 73
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_2fb14d7b4913ea118887392bb9328d6f.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_2fb14d7b4913ea118887392bb9328d6f.setIcon(icon_4d2618c351673d0fafc88cfe2ce9bca3);
+            
+    
+            var marker_f81614a883c072aae153faf70b48882b = L.marker(
+                [-25.40341265230783, -49.270640533186594],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_d9335dc9cca21897a063090545023710 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f9fb47f850c0a238bc496cc7629f9ee7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c3b07c6c9b336aefc30cbc536aacd5c9 = $(`<div id="html_c3b07c6c9b336aefc30cbc536aacd5c9" style="width: 100.0%; height: 100.0%;">Cliente: MARMITARIA NOVA ERA EIRELI<br>Ordem: 74</div>`)[0];
+                popup_f9fb47f850c0a238bc496cc7629f9ee7.setContent(html_c3b07c6c9b336aefc30cbc536aacd5c9);
+            
+        
+
+        marker_f81614a883c072aae153faf70b48882b.bindPopup(popup_f9fb47f850c0a238bc496cc7629f9ee7)
+        ;
+
+        
+    
+    
+            marker_f81614a883c072aae153faf70b48882b.bindTooltip(
+                `<div>
+                     Parada 74
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_f81614a883c072aae153faf70b48882b.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f81614a883c072aae153faf70b48882b.setIcon(icon_d9335dc9cca21897a063090545023710);
+            
+    
+            var marker_86b98b3a6f900e73314588716ebbfae7 = L.marker(
+                [-25.402819574973638, -49.27253663946927],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_0006559eaf627022c2473c788019d1b6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_81ac9658c6c1a0287db9a2f5a846b8d7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0f4a36d30b5a8956b6b92322a6e513de = $(`<div id="html_0f4a36d30b5a8956b6b92322a6e513de" style="width: 100.0%; height: 100.0%;">Cliente: ANTONIO FERREIRA EPP<br>Ordem: 75</div>`)[0];
+                popup_81ac9658c6c1a0287db9a2f5a846b8d7.setContent(html_0f4a36d30b5a8956b6b92322a6e513de);
+            
+        
+
+        marker_86b98b3a6f900e73314588716ebbfae7.bindPopup(popup_81ac9658c6c1a0287db9a2f5a846b8d7)
+        ;
+
+        
+    
+    
+            marker_86b98b3a6f900e73314588716ebbfae7.bindTooltip(
+                `<div>
+                     Parada 75
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_86b98b3a6f900e73314588716ebbfae7.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_86b98b3a6f900e73314588716ebbfae7.setIcon(icon_0006559eaf627022c2473c788019d1b6);
+            
+    
+            var marker_a6fe4aec56195fab65a1595f7d9e2242 = L.marker(
+                [-25.401572196523226, -49.275882456434836],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_456647a1d7fa49ec68e500e5322a2202 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_84a954cf633a4c351d5424c7d1b7a022 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_afc42c3c3c8df8c9e0e2e1c1fb74f9df = $(`<div id="html_afc42c3c3c8df8c9e0e2e1c1fb74f9df" style="width: 100.0%; height: 100.0%;">Cliente: ACOUGUE E RESTAURANTE CANTINHO<br>Ordem: 76</div>`)[0];
+                popup_84a954cf633a4c351d5424c7d1b7a022.setContent(html_afc42c3c3c8df8c9e0e2e1c1fb74f9df);
+            
+        
+
+        marker_a6fe4aec56195fab65a1595f7d9e2242.bindPopup(popup_84a954cf633a4c351d5424c7d1b7a022)
+        ;
+
+        
+    
+    
+            marker_a6fe4aec56195fab65a1595f7d9e2242.bindTooltip(
+                `<div>
+                     Parada 76
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_a6fe4aec56195fab65a1595f7d9e2242.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_a6fe4aec56195fab65a1595f7d9e2242.setIcon(icon_456647a1d7fa49ec68e500e5322a2202);
+            
+    
+            var marker_700e2971f957c35dbbda19d17238ee50 = L.marker(
+                [-25.392313679478175, -49.26978224492788],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_8da2840967fb612d8ab888f8df2dcf7f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4ece6555f49901e6eadbe0b37c281ee8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fe1c123df08a0edadb1e1d058a995538 = $(`<div id="html_fe1c123df08a0edadb1e1d058a995538" style="width: 100.0%; height: 100.0%;">Cliente: MARIA FERREIRA ME<br>Ordem: 77</div>`)[0];
+                popup_4ece6555f49901e6eadbe0b37c281ee8.setContent(html_fe1c123df08a0edadb1e1d058a995538);
+            
+        
+
+        marker_700e2971f957c35dbbda19d17238ee50.bindPopup(popup_4ece6555f49901e6eadbe0b37c281ee8)
+        ;
+
+        
+    
+    
+            marker_700e2971f957c35dbbda19d17238ee50.bindTooltip(
+                `<div>
+                     Parada 77
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_700e2971f957c35dbbda19d17238ee50.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_700e2971f957c35dbbda19d17238ee50.setIcon(icon_8da2840967fb612d8ab888f8df2dcf7f);
+            
+    
+            var marker_59add94aff2a1cf13d3d8d5414fd1684 = L.marker(
+                [-25.39380468373497, -49.26646083392692],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_5aa33b711cf270fa9823de8f27bbb4b7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_434ffecb2c06a63edf455ec5b5f25630 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0086889321bb2315f65a98866c211deb = $(`<div id="html_0086889321bb2315f65a98866c211deb" style="width: 100.0%; height: 100.0%;">Cliente: PASTELARIA DA VILA<br>Ordem: 78</div>`)[0];
+                popup_434ffecb2c06a63edf455ec5b5f25630.setContent(html_0086889321bb2315f65a98866c211deb);
+            
+        
+
+        marker_59add94aff2a1cf13d3d8d5414fd1684.bindPopup(popup_434ffecb2c06a63edf455ec5b5f25630)
+        ;
+
+        
+    
+    
+            marker_59add94aff2a1cf13d3d8d5414fd1684.bindTooltip(
+                `<div>
+                     Parada 78
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_59add94aff2a1cf13d3d8d5414fd1684.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_59add94aff2a1cf13d3d8d5414fd1684.setIcon(icon_5aa33b711cf270fa9823de8f27bbb4b7);
+            
+    
+            var marker_e436ff2a8028de6270a31c4edf33a88b = L.marker(
+                [-25.397537581939368, -49.263602250114914],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_e7702ad4bda8093983cc49b4cadc1832 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3a4c506a4c1cdfcf0807ec350cb71e01 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_69743123c00ecc48036a8cf0e7e23244 = $(`<div id="html_69743123c00ecc48036a8cf0e7e23244" style="width: 100.0%; height: 100.0%;">Cliente: CONFEITARIA PRACA<br>Ordem: 79</div>`)[0];
+                popup_3a4c506a4c1cdfcf0807ec350cb71e01.setContent(html_69743123c00ecc48036a8cf0e7e23244);
+            
+        
+
+        marker_e436ff2a8028de6270a31c4edf33a88b.bindPopup(popup_3a4c506a4c1cdfcf0807ec350cb71e01)
+        ;
+
+        
+    
+    
+            marker_e436ff2a8028de6270a31c4edf33a88b.bindTooltip(
+                `<div>
+                     Parada 79
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_e436ff2a8028de6270a31c4edf33a88b.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_e436ff2a8028de6270a31c4edf33a88b.setIcon(icon_e7702ad4bda8093983cc49b4cadc1832);
+            
+    
+            var marker_f61204fee57abf433f513bd86bf47e42 = L.marker(
+                [-25.39554221998865, -49.25986236029553],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_7981b3d78814dbe736dc226d30e8c63d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d9feaf341bee1a616ad0ec5c80b5b202 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f81d5afbccebee8291274224489391d4 = $(`<div id="html_f81d5afbccebee8291274224489391d4" style="width: 100.0%; height: 100.0%;">Cliente: MARMITARIA DO CHEFE ME<br>Ordem: 80</div>`)[0];
+                popup_d9feaf341bee1a616ad0ec5c80b5b202.setContent(html_f81d5afbccebee8291274224489391d4);
+            
+        
+
+        marker_f61204fee57abf433f513bd86bf47e42.bindPopup(popup_d9feaf341bee1a616ad0ec5c80b5b202)
+        ;
+
+        
+    
+    
+            marker_f61204fee57abf433f513bd86bf47e42.bindTooltip(
+                `<div>
+                     Parada 80
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_f61204fee57abf433f513bd86bf47e42.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_f61204fee57abf433f513bd86bf47e42.setIcon(icon_7981b3d78814dbe736dc226d30e8c63d);
+            
+    
+            var marker_0d8680e6bd066fffe6bd092449d82498 = L.marker(
+                [-25.39443894713195, -49.26090626872373],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_862252d32eb7ebf0ab3874a5fe4873b9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_df522c65b7c37e01c1565df9e8d8a168 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_88300972e802d5d563e76d89ab1b6731 = $(`<div id="html_88300972e802d5d563e76d89ab1b6731" style="width: 100.0%; height: 100.0%;">Cliente: ACOUGUE E RESTAURANTE DA VILA LTDA<br>Ordem: 81</div>`)[0];
+                popup_df522c65b7c37e01c1565df9e8d8a168.setContent(html_88300972e802d5d563e76d89ab1b6731);
+            
+        
+
+        marker_0d8680e6bd066fffe6bd092449d82498.bindPopup(popup_df522c65b7c37e01c1565df9e8d8a168)
+        ;
+
+        
+    
+    
+            marker_0d8680e6bd066fffe6bd092449d82498.bindTooltip(
+                `<div>
+                     Parada 81
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_0d8680e6bd066fffe6bd092449d82498.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_0d8680e6bd066fffe6bd092449d82498.setIcon(icon_862252d32eb7ebf0ab3874a5fe4873b9);
+            
+    
+            var marker_c831324faa3444e0d0c75ccfe5b209ad = L.marker(
+                [-25.39220663023354, -49.261156727292594],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_9796f042e422e702517e0a0740f2de61 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9340ed26371d06bddbc240a336705a4c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_395526deaa0bd6ddf6ce6d7062fe4230 = $(`<div id="html_395526deaa0bd6ddf6ce6d7062fe4230" style="width: 100.0%; height: 100.0%;">Cliente: CARLOS MARTINS GOMES<br>Ordem: 82</div>`)[0];
+                popup_9340ed26371d06bddbc240a336705a4c.setContent(html_395526deaa0bd6ddf6ce6d7062fe4230);
+            
+        
+
+        marker_c831324faa3444e0d0c75ccfe5b209ad.bindPopup(popup_9340ed26371d06bddbc240a336705a4c)
+        ;
+
+        
+    
+    
+            marker_c831324faa3444e0d0c75ccfe5b209ad.bindTooltip(
+                `<div>
+                     Parada 82
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_c831324faa3444e0d0c75ccfe5b209ad.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_c831324faa3444e0d0c75ccfe5b209ad.setIcon(icon_9796f042e422e702517e0a0740f2de61);
+            
+    
+            var marker_e87b449edfe628328998b36a68ba85d6 = L.marker(
+                [-25.38804204204833, -49.265772426313625],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_81a6e30fce1243578d7c649a947b3845 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_719a56af695f7ea948dbc9b82d884b07 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_e0f08b2e0fac7d581fb1f3cd89704a83 = $(`<div id="html_e0f08b2e0fac7d581fb1f3cd89704a83" style="width: 100.0%; height: 100.0%;">Cliente: CONFEITARIA ESTRELA LTDA<br>Ordem: 83</div>`)[0];
+                popup_719a56af695f7ea948dbc9b82d884b07.setContent(html_e0f08b2e0fac7d581fb1f3cd89704a83);
+            
+        
+
+        marker_e87b449edfe628328998b36a68ba85d6.bindPopup(popup_719a56af695f7ea948dbc9b82d884b07)
+        ;
+
+        
+    
+    
+            marker_e87b449edfe628328998b36a68ba85d6.bindTooltip(
+                `<div>
+                     Parada 83
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_e87b449edfe628328998b36a68ba85d6.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_e87b449edfe628328998b36a68ba85d6.setIcon(icon_81a6e30fce1243578d7c649a947b3845);
+            
+    
+            var marker_850a191bbe653dd8b85b404e087e5ac0 = L.marker(
+                [-25.406688504089956, -49.24529973007188],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_74e1c91e1ea2b886d1e5d0281f327ba3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_008958733367113e49cc31464b50ede0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fde5c044c3b2edbbdbb3dfc7e55f516c = $(`<div id="html_fde5c044c3b2edbbdbb3dfc7e55f516c" style="width: 100.0%; height: 100.0%;">Cliente: HAMBURGUERIA NOVA ERA ME<br>Ordem: 84</div>`)[0];
+                popup_008958733367113e49cc31464b50ede0.setContent(html_fde5c044c3b2edbbdbb3dfc7e55f516c);
+            
+        
+
+        marker_850a191bbe653dd8b85b404e087e5ac0.bindPopup(popup_008958733367113e49cc31464b50ede0)
+        ;
+
+        
+    
+    
+            marker_850a191bbe653dd8b85b404e087e5ac0.bindTooltip(
+                `<div>
+                     Parada 84
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_850a191bbe653dd8b85b404e087e5ac0.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_850a191bbe653dd8b85b404e087e5ac0.setIcon(icon_74e1c91e1ea2b886d1e5d0281f327ba3);
+            
+    
+            var marker_e621a72ef78deaa82733b4dc20a74285 = L.marker(
+                [-25.413208632457707, -49.244446476449674],
+                {
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            var icon_43348044f7b4a40938ad1d1983e8c9b1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_88e3e2aee982a32aaa9ff18e25fbfedf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0b6f07d393d1ce0ee761fc8f08fbb6af = $(`<div id="html_0b6f07d393d1ce0ee761fc8f08fbb6af" style="width: 100.0%; height: 100.0%;">Cliente: ROSANGELA WISNIEWSKI LTDA<br>Ordem: 85</div>`)[0];
+                popup_88e3e2aee982a32aaa9ff18e25fbfedf.setContent(html_0b6f07d393d1ce0ee761fc8f08fbb6af);
+            
+        
+
+        marker_e621a72ef78deaa82733b4dc20a74285.bindPopup(popup_88e3e2aee982a32aaa9ff18e25fbfedf)
+        ;
+
+        
+    
+    
+            marker_e621a72ef78deaa82733b4dc20a74285.bindTooltip(
+                `<div>
+                     Parada 85
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                {
+                    const element = marker_e621a72ef78deaa82733b4dc20a74285.getElement();
+                    if (element) {
+                        element.style.width = "";
+                        element.style.height = "";
+                        element.style.marginLeft = "";
+                        element.style.marginTop = "";
+                    }
+                }
+                marker_e621a72ef78deaa82733b4dc20a74285.setIcon(icon_43348044f7b4a40938ad1d1983e8c9b1);
+            
+    
+            var poly_line_7bb36f428b82fa73faf7fed8e01d64b4 = L.polyline(
+                [[-25.367471650449552, -49.241912660501754], [-25.369586493067853, -49.24351994474322], [-25.371308441412484, -49.236696813459886], [-25.380749306247044, -49.239477467428486], [-25.38310071690329, -49.24119810272256], [-25.383218209016835, -49.243850872346414], [-25.38194946195124, -49.243969476570555], [-25.380815098418577, -49.244251065451465], [-25.380798605514403, -49.24307413564147], [-25.3764336716487, -49.24590425644558], [-25.376050841601074, -49.247909135464546], [-25.376103771011987, -49.25239201215348], [-25.37611610746312, -49.253671896078444], [-25.3807360004958, -49.25383983423523], [-25.3812807178556, -49.253222767609365], [-25.383668544470318, -49.25125523134691], [-25.384315255254542, -49.25177042964103], [-25.384949844324733, -49.25398972030378], [-25.386479072267083, -49.25653341440706], [-25.38796028297826, -49.25717881346138], [-25.38719726807903, -49.261441558975896], [-25.38524209063937, -49.26278721396313], [-25.381566801005388, -49.263859937895496], [-25.377176633237106, -49.25954092353538], [-25.373126618668195, -49.2585758192884], [-25.37166500564453, -49.256971074063614], [-25.37384134919241, -49.2681663997831], [-25.382489977483598, -49.257282148114236], [-25.384075445288254, -49.248400839053524], [-25.386972405952125, -49.24964528008029], [-25.388208715773672, -49.24939985675315], [-25.388545787964958, -49.25035124642917], [-25.39067192691583, -49.24630324710124], [-25.392788117779684, -49.24655565318418], [-25.393171819315384, -49.24700976718721], [-25.39422428550587, -49.24571611504325], [-25.393768210418177, -49.24393984799985], [-25.397212212422637, -49.242651284276995], [-25.400174153284148, -49.24274911756988], [-25.402621263597737, -49.23981253534939], [-25.399445561173785, -49.23768336300266], [-25.398019893661065, -49.23812214768523], [-25.397390181135187, -49.23610997865906], [-25.391757255037383, -49.2367649852799], [-25.391574817350254, -49.23864623506074], [-25.39141580504853, -49.240016629946], [-25.390091076920516, -49.238593426721415], [-25.391109791489807, -49.23433716432416], [-25.385477922708073, -49.23414309446006], [-25.386580191493326, -49.2456971380248], [-25.395156574519657, -49.25052279157877], [-25.3946745273871, -49.25288976867091], [-25.397946341381733, -49.2522173555621], [-25.399650032722832, -49.25758947182111], [-25.399304772257516, -49.25898818488957], [-25.40011718908034, -49.2598270695477], [-25.400392177591026, -49.262078182833804], [-25.402088488265623, -49.261505114565], [-25.403234974689738, -49.26159029017092], [-25.402796685346516, -49.26289404528092], [-25.402878424348646, -49.2636543376957], [-25.40402780895424, -49.26377062785497], [-25.405610591173076, -49.263082090091046], [-25.40622968226841, -49.2638254831721], [-25.407610003973442, -49.26251873500397], [-25.410774149232342, -49.26057102690155], [-25.405076567999508, -49.266446793161165], [-25.402829606327895, -49.26623418754562], [-25.402387171438615, -49.266416392999], [-25.4014305585539, -49.26447665851014], [-25.3993696796051, -49.26625752454813], [-25.39785363617781, -49.26768787497584], [-25.400485610994554, -49.26867496934209], [-25.40341265230783, -49.270640533186594], [-25.402819574973638, -49.27253663946927], [-25.401572196523226, -49.275882456434836], [-25.392313679478175, -49.26978224492788], [-25.39380468373497, -49.26646083392692], [-25.397537581939368, -49.263602250114914], [-25.39554221998865, -49.25986236029553], [-25.39443894713195, -49.26090626872373], [-25.39220663023354, -49.261156727292594], [-25.38804204204833, -49.265772426313625], [-25.406688504089956, -49.24529973007188], [-25.413208632457707, -49.244446476449674]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 4}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+        
+    
+            poly_line_7bb36f428b82fa73faf7fed8e01d64b4.bindTooltip(
+                `<div>
+                     Trajeto da rota
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            map_ac2db9df3af1889df32da827057844d0.fitBounds(
+                [[-25.367471650449552, -49.241912660501754], [-25.369586493067853, -49.24351994474322], [-25.371308441412484, -49.236696813459886], [-25.380749306247044, -49.239477467428486], [-25.38310071690329, -49.24119810272256], [-25.383218209016835, -49.243850872346414], [-25.38194946195124, -49.243969476570555], [-25.380815098418577, -49.244251065451465], [-25.380798605514403, -49.24307413564147], [-25.3764336716487, -49.24590425644558], [-25.376050841601074, -49.247909135464546], [-25.376103771011987, -49.25239201215348], [-25.37611610746312, -49.253671896078444], [-25.3807360004958, -49.25383983423523], [-25.3812807178556, -49.253222767609365], [-25.383668544470318, -49.25125523134691], [-25.384315255254542, -49.25177042964103], [-25.384949844324733, -49.25398972030378], [-25.386479072267083, -49.25653341440706], [-25.38796028297826, -49.25717881346138], [-25.38719726807903, -49.261441558975896], [-25.38524209063937, -49.26278721396313], [-25.381566801005388, -49.263859937895496], [-25.377176633237106, -49.25954092353538], [-25.373126618668195, -49.2585758192884], [-25.37166500564453, -49.256971074063614], [-25.37384134919241, -49.2681663997831], [-25.382489977483598, -49.257282148114236], [-25.384075445288254, -49.248400839053524], [-25.386972405952125, -49.24964528008029], [-25.388208715773672, -49.24939985675315], [-25.388545787964958, -49.25035124642917], [-25.39067192691583, -49.24630324710124], [-25.392788117779684, -49.24655565318418], [-25.393171819315384, -49.24700976718721], [-25.39422428550587, -49.24571611504325], [-25.393768210418177, -49.24393984799985], [-25.397212212422637, -49.242651284276995], [-25.400174153284148, -49.24274911756988], [-25.402621263597737, -49.23981253534939], [-25.399445561173785, -49.23768336300266], [-25.398019893661065, -49.23812214768523], [-25.397390181135187, -49.23610997865906], [-25.391757255037383, -49.2367649852799], [-25.391574817350254, -49.23864623506074], [-25.39141580504853, -49.240016629946], [-25.390091076920516, -49.238593426721415], [-25.391109791489807, -49.23433716432416], [-25.385477922708073, -49.23414309446006], [-25.386580191493326, -49.2456971380248], [-25.395156574519657, -49.25052279157877], [-25.3946745273871, -49.25288976867091], [-25.397946341381733, -49.2522173555621], [-25.399650032722832, -49.25758947182111], [-25.399304772257516, -49.25898818488957], [-25.40011718908034, -49.2598270695477], [-25.400392177591026, -49.262078182833804], [-25.402088488265623, -49.261505114565], [-25.403234974689738, -49.26159029017092], [-25.402796685346516, -49.26289404528092], [-25.402878424348646, -49.2636543376957], [-25.40402780895424, -49.26377062785497], [-25.405610591173076, -49.263082090091046], [-25.40622968226841, -49.2638254831721], [-25.407610003973442, -49.26251873500397], [-25.410774149232342, -49.26057102690155], [-25.405076567999508, -49.266446793161165], [-25.402829606327895, -49.26623418754562], [-25.402387171438615, -49.266416392999], [-25.4014305585539, -49.26447665851014], [-25.3993696796051, -49.26625752454813], [-25.39785363617781, -49.26768787497584], [-25.400485610994554, -49.26867496934209], [-25.40341265230783, -49.270640533186594], [-25.402819574973638, -49.27253663946927], [-25.401572196523226, -49.275882456434836], [-25.392313679478175, -49.26978224492788], [-25.39380468373497, -49.26646083392692], [-25.397537581939368, -49.263602250114914], [-25.39554221998865, -49.25986236029553], [-25.39443894713195, -49.26090626872373], [-25.39220663023354, -49.261156727292594], [-25.38804204204833, -49.265772426313625], [-25.406688504089956, -49.24529973007188], [-25.413208632457707, -49.244446476449674]],
+                {}
+            );
+        
+    
+            var layer_control_b5bb6d72097f1b18675ee90d2e76fef1_layers = {
+                base_layers : {
+                    "Imagem de sat\u00e9lite" : tile_layer_a37b1ef1774d34829dcc9738e4128149,
+                    "Mapa de ruas" : tile_layer_8d23a541afbed8fe3f153cd985bba73e,
+                    "Sat\u00e9lite" : tile_layer_948d3a1b78bcf02afaa99848b6463039,
+                    "Mapa convencional" : tile_layer_effccbde7c07ebdd5b832ec95d0f03f5,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_b5bb6d72097f1b18675ee90d2e76fef1 = L.control.layers(
+                layer_control_b5bb6d72097f1b18675ee90d2e76fef1_layers.base_layers,
+                layer_control_b5bb6d72097f1b18675ee90d2e76fef1_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_ac2db9df3af1889df32da827057844d0);
+
+        
+</script>
+</html>

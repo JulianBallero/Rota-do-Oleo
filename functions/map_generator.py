@@ -75,6 +75,8 @@ def generate_map(
 
     if route_df.empty:
         raise ValueError("Nenhuma coordenada válida para gerar o mapa.")
+    
+    
 
     route_df = route_df.sort_values(order_col)
 
