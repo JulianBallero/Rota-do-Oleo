@@ -7,7 +7,11 @@ import yaml
 from functions.agrupador.kmeans import cluster_clients
 from functions.roteirizador.knn import generate_route, plot_route
 from functions.geocoding import geocode_csv
-from functions.map_generator import generate_map, generate_static_map
+from functions.map_generator import (
+    generate_map,
+    generate_static_map,
+    open_maps_in_browser,
+)
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -153,6 +157,7 @@ def main():
     route_cfg = config.get("routing", {})
     # Mapa-base dos mapas: "satellite" (padrão) ou "streets".
     basemap = config.get("map", {}).get("basemap", "satellite")
+    html_files = []  # mapas HTML gerados, para abrir no navegador ao final
 
     for cluster_id, cluster_df in clusters.items():
         route = generate_route(cluster_df, route_cfg)
@@ -198,6 +203,7 @@ def main():
             output_dir=graphs_dir,
             basemap=basemap,
         )
+        html_files.append(graphs_dir / map_file)
 
         logging.info(
             "Cluster %s: %s paradas; CSV: %s; mapa interativo: %s",
@@ -208,6 +214,10 @@ def main():
         )
 
     logging.info("Processamento concluído. Resultados em %s", output_dir)
+
+    # Pergunta no console e abre os mapas (grupos primeiro, depois as rotas).
+    if config.get("map", {}).get("open_in_browser", True):
+        open_maps_in_browser([groups_dir / "mapa_grupos.html", *html_files])
 
 
 if __name__ == "__main__":

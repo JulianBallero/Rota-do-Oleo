@@ -7,6 +7,9 @@ import html
 import logging
 import math
 import os
+import sys
+import time
+import webbrowser
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 from pathlib import Path
@@ -391,3 +394,58 @@ def generate_static_map(
     logging.info("Mapa estático salvo em: %s", output_file)
 
     return output_file
+
+
+# ---------------------------------------------------------------------------
+# Abrir os mapas HTML no navegador
+# ---------------------------------------------------------------------------
+def open_maps_in_browser(html_files, ask=True, delay=0.4):
+    """Pede permissão no console e abre cada HTML em uma aba do navegador.
+
+    Parâmetros
+    ----------
+    html_files : lista de caminhos de arquivos .html (ordem = ordem das abas).
+    ask        : se True, pergunta antes de abrir (padrão).
+    delay      : pausa, em segundos, entre as abas, para o navegador não
+                 descartar aberturas muito rápidas.
+
+    Retorna True se abriu os mapas, False caso contrário.
+    """
+    arquivos = []
+    for item in html_files:
+        caminho = Path(item).resolve()
+        if caminho.is_file() and caminho not in arquivos:
+            arquivos.append(caminho)
+
+    if not arquivos:
+        print("Nenhum mapa HTML encontrado para abrir.")
+        return False
+
+    if ask:
+        # Sem terminal interativo (agendador, pipe, etc.) não há como perguntar.
+        if not sys.stdin or not sys.stdin.isatty():
+            logging.info(
+                "Terminal não interativo; os mapas não serão abertos "
+                "automaticamente."
+            )
+            return False
+        try:
+            resposta = input(
+                f"\nAbrir {len(arquivos)} mapa(s) no navegador, "
+                "cada um em uma aba? [s/N]: "
+            )
+        except (EOFError, KeyboardInterrupt):
+            print()
+            return False
+        if resposta.strip().casefold() not in ("s", "sim", "y", "yes"):
+            print("Os mapas não foram abertos.")
+            return False
+
+    for caminho in arquivos:
+        if not webbrowser.open_new_tab(caminho.as_uri()):
+            logging.warning("Não foi possível abrir o navegador para: %s", caminho)
+            return False
+        time.sleep(delay)
+
+    print(f"{len(arquivos)} mapa(s) aberto(s) no navegador.")
+    return True

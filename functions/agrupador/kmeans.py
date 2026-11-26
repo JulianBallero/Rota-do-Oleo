@@ -59,14 +59,44 @@ def plot_clusters_html(clusters, lat_col, lon_col, output_file):
     m = folium.Map(
         location=[all_groups[lat_col].mean(), all_groups[lon_col].mean()],
         zoom_start=12,
+        tiles=None,
+        control_scale=True,
     )
+
+    # Mapas-base da Esri: funcionam ao abrir o HTML direto do disco. O padrão
+    # do folium (tile.openstreetmap.org) é bloqueado sem o cabeçalho Referer,
+    # o que deixa o fundo do mapa em branco.
+    folium.TileLayer(
+        tiles=(
+            "https://server.arcgisonline.com/ArcGIS/rest/services/"
+            "World_Imagery/MapServer/tile/{z}/{y}/{x}"
+        ),
+        attr="Esri, Maxar, Earthstar Geographics",
+        name="Imagem de satélite",
+        overlay=False,
+        control=True,
+        show=True,
+    ).add_to(m)
+    folium.TileLayer(
+        tiles=(
+            "https://server.arcgisonline.com/ArcGIS/rest/services/"
+            "World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+        ),
+        attr="Esri",
+        name="Mapa de ruas",
+        overlay=False,
+        control=True,
+        show=False,
+    ).add_to(m)
+
     for cluster_id, group in clusters.items():
         layer = folium.FeatureGroup(name=f"Grupo {cluster_id} ({len(group)})")
         for _, row in group.iterrows():
             label = row.get("cliente", row.get("codigo", ""))
             folium.CircleMarker(
                 location=[row[lat_col], row[lon_col]], radius=5,
-                color=_color(cluster_id), fill=True, fill_opacity=0.85,
+                color="white", weight=1, fill=True,
+                fill_color=_color(cluster_id), fill_opacity=0.9,
                 tooltip=f"Grupo {cluster_id} - {label}",
             ).add_to(layer)
         layer.add_to(m)
