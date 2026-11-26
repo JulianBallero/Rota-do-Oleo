@@ -1,0 +1,128 @@
+2026-11-24 22:13:49,624 - INFO - Iniciando Rota do Óleo
+2026-11-24 22:13:49,628 - INFO - CSV carregado: D:\Programas_Github\Pessoal\Rota-do-Oleo\dataset\clientes-com-coordenadas.csv (590 clientes)
+2026-11-24 22:13:50,549 - WARNING - folium não instalado (pip install folium); mapa HTML não gerado.
+2026-11-24 22:13:50,550 - INFO - 20 grupos criados
+2026-11-24 22:13:50,799 - INFO - Cluster 0: 33 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_0.csv
+2026-11-24 22:13:51,009 - INFO - Cluster 1: 26 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_1.csv
+2026-11-24 22:13:51,284 - INFO - Cluster 2: 62 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_2.csv
+2026-11-24 22:13:51,460 - INFO - Cluster 3: 18 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_3.csv
+2026-11-24 22:13:51,685 - INFO - Cluster 4: 19 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_4.csv
+2026-11-24 22:13:51,896 - INFO - Cluster 5: 34 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_5.csv
+2026-11-24 22:13:52,094 - INFO - Cluster 6: 31 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_6.csv
+2026-11-24 22:13:52,421 - INFO - Cluster 7: 72 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_7.csv
+2026-11-24 22:13:52,626 - INFO - Cluster 8: 21 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_8.csv
+2026-11-24 22:13:52,798 - INFO - Cluster 9: 15 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_9.csv
+2026-11-24 22:13:53,029 - INFO - Cluster 10: 35 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_10.csv
+2026-11-24 22:13:53,217 - INFO - Cluster 11: 12 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_11.csv
+2026-11-24 22:13:53,429 - INFO - Cluster 12: 22 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_12.csv
+2026-11-24 22:13:53,599 - INFO - Cluster 13: 23 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_13.csv
+2026-11-24 22:13:53,863 - INFO - Cluster 14: 43 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_14.csv
+2026-11-24 22:13:54,097 - INFO - Cluster 15: 36 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_15.csv
+2026-11-24 22:13:54,269 - INFO - Cluster 16: 14 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_16.csv
+2026-11-24 22:13:54,474 - INFO - Cluster 17: 35 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_17.csv
+2026-11-24 22:13:54,659 - INFO - Cluster 18: 20 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_18.csv
+2026-11-24 22:13:54,844 - INFO - Cluster 19: 19 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_19.csv
+2026-11-24 22:13:54,844 - INFO - Processamento concluído. Resultados em D:\Programas_Github\Pessoal\Rota-do-Oleo\output
+2026-11-24 22:24:22,126 - INFO - Iniciando Rota do Óleo
+2026-11-24 22:24:22,129 - INFO - CSV carregado: D:\Programas_Github\Pessoal\Rota-do-Oleo\dataset\clientes-com-coordenadas.csv (590 clientes)
+2026-11-24 22:24:23,303 - INFO - 20 grupos criados
+2026-11-24 22:24:23,473 - INFO - Cluster 0: 33 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_0.csv
+2026-11-24 22:24:23,615 - INFO - Cluster 1: 26 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_1.csv
+2026-11-24 22:24:23,832 - INFO - Cluster 2: 62 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_2.csv
+2026-11-24 22:24:23,978 - INFO - Cluster 3: 18 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_3.csv
+2026-11-24 22:24:24,146 - INFO - Cluster 4: 19 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_4.csv
+2026-11-24 22:24:24,323 - INFO - Cluster 5: 34 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_5.csv
+2026-11-24 22:24:24,486 - INFO - Cluster 6: 31 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_6.csv
+2026-11-24 22:24:24,722 - INFO - Cluster 7: 72 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_7.csv
+2026-11-24 22:24:24,885 - INFO - Cluster 8: 21 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_8.csv
+2026-11-24 22:24:25,018 - INFO - Cluster 9: 15 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_9.csv
+2026-11-24 22:24:25,193 - INFO - Cluster 10: 35 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_10.csv
+2026-11-24 22:24:25,339 - INFO - Cluster 11: 12 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_11.csv
+2026-11-24 22:24:25,490 - INFO - Cluster 12: 22 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_12.csv
+2026-11-24 22:24:25,654 - INFO - Cluster 13: 23 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_13.csv
+2026-11-24 22:24:25,839 - INFO - Cluster 14: 43 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_14.csv
+2026-11-24 22:24:26,022 - INFO - Cluster 15: 36 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_15.csv
+2026-11-24 22:24:26,158 - INFO - Cluster 16: 14 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_16.csv
+2026-11-24 22:24:26,340 - INFO - Cluster 17: 35 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_17.csv
+2026-11-24 22:24:26,480 - INFO - Cluster 18: 20 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_18.csv
+2026-11-24 22:24:26,633 - INFO - Cluster 19: 19 paradas; rota salva em D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_19.csv
+2026-11-24 22:24:26,633 - INFO - Processamento concluído. Resultados em D:\Programas_Github\Pessoal\Rota-do-Oleo\output
+2026-11-24 22:29:42,598 - INFO - Iniciando Rota do Óleo
+2026-11-24 22:29:42,601 - INFO - CSV carregado: D:\Programas_Github\Pessoal\Rota-do-Oleo\dataset\clientes-com-coordenadas.csv (590 clientes)
+2026-11-24 22:29:43,967 - INFO - 10 grupos criados
+2026-11-24 22:33:37,450 - INFO - Iniciando Rota do Óleo
+2026-11-24 22:33:37,453 - INFO - CSV carregado: D:\Programas_Github\Pessoal\Rota-do-Oleo\dataset\clientes-com-coordenadas.csv (590 clientes)
+2026-11-24 22:33:38,853 - INFO - 10 grupos criados
+2026-11-24 22:33:39,151 - INFO - Cluster 0: 51 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_0.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_0.html
+2026-11-24 22:33:39,687 - INFO - Cluster 1: 126 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_1.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_1.html
+2026-11-24 22:33:40,058 - INFO - Cluster 2: 85 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_2.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_2.html
+2026-11-24 22:33:40,279 - INFO - Cluster 3: 32 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_3.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_3.html
+2026-11-24 22:33:40,470 - INFO - Cluster 4: 23 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_4.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_4.html
+2026-11-24 22:33:40,820 - INFO - Cluster 5: 73 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_5.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_5.html
+2026-11-24 22:33:41,063 - INFO - Cluster 6: 34 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_6.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_6.html
+2026-11-24 22:33:41,451 - INFO - Cluster 7: 77 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_7.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_7.html
+2026-11-24 22:33:41,725 - INFO - Cluster 8: 53 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_8.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_8.html
+2026-11-24 22:33:41,983 - INFO - Cluster 9: 36 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_9.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_9.html
+2026-11-24 22:33:41,983 - INFO - Processamento concluído. Resultados em D:\Programas_Github\Pessoal\Rota-do-Oleo\output
+2026-11-24 22:39:46,721 - INFO - Iniciando Rota do Óleo
+2026-11-24 22:39:46,724 - INFO - CSV carregado: D:\Programas_Github\Pessoal\Rota-do-Oleo\dataset\clientes-com-coordenadas.csv (590 clientes)
+2026-11-24 22:39:48,106 - INFO - 10 grupos criados
+2026-11-24 22:39:48,388 - INFO - Cluster 0: 51 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_0.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_0.html
+2026-11-24 22:39:48,942 - INFO - Cluster 1: 126 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_1.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_1.html
+2026-11-24 22:39:49,312 - INFO - Cluster 2: 85 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_2.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_2.html
+2026-11-24 22:39:49,521 - INFO - Cluster 3: 32 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_3.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_3.html
+2026-11-24 22:39:49,729 - INFO - Cluster 4: 23 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_4.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_4.html
+2026-11-24 22:39:50,062 - INFO - Cluster 5: 73 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_5.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_5.html
+2026-11-24 22:39:50,304 - INFO - Cluster 6: 34 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_6.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_6.html
+2026-11-24 22:39:50,695 - INFO - Cluster 7: 77 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_7.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_7.html
+2026-11-24 22:39:50,987 - INFO - Cluster 8: 53 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_8.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_8.html
+2026-11-24 22:39:51,240 - INFO - Cluster 9: 36 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_9.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_9.html
+2026-11-24 22:39:51,240 - INFO - Processamento concluído. Resultados em D:\Programas_Github\Pessoal\Rota-do-Oleo\output
+2026-11-25 17:15:13,753 - INFO - Iniciando Rota do Óleo
+2026-11-25 17:15:13,761 - INFO - CSV carregado: D:\Programas_Github\Pessoal\Rota-do-Oleo\dataset\clientes-com-coordenadas.csv (590 clientes)
+2026-11-25 17:15:15,729 - INFO - 10 grupos criados
+2026-11-25 17:15:16,131 - INFO - Cluster 0: 51 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_0.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_0.html
+2026-11-25 17:15:16,835 - INFO - Cluster 1: 126 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_1.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_1.html
+2026-11-25 17:15:17,353 - INFO - Cluster 2: 85 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_2.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_2.html
+2026-11-25 17:15:17,643 - INFO - Cluster 3: 32 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_3.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_3.html
+2026-11-25 17:15:17,917 - INFO - Cluster 4: 23 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_4.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_4.html
+2026-11-25 17:15:18,432 - INFO - Cluster 5: 73 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_5.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_5.html
+2026-11-25 17:15:18,751 - INFO - Cluster 6: 34 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_6.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_6.html
+2026-11-25 17:15:19,145 - INFO - Cluster 7: 77 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_7.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_7.html
+2026-11-25 17:15:19,472 - INFO - Cluster 8: 53 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_8.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_8.html
+2026-11-25 17:15:19,800 - INFO - Cluster 9: 36 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_9.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_9.html
+2026-11-25 17:15:19,800 - INFO - Processamento concluído. Resultados em D:\Programas_Github\Pessoal\Rota-do-Oleo\output
+2026-11-25 17:16:43,467 - INFO - Iniciando Rota do Óleo
+2026-11-25 17:16:43,470 - INFO - CSV carregado: D:\Programas_Github\Pessoal\Rota-do-Oleo\dataset\clientes-com-coordenadas.csv (590 clientes)
+2026-11-25 17:16:45,261 - INFO - 10 grupos criados
+2026-11-25 17:16:46,616 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_0.png
+2026-11-25 17:16:46,709 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_0.html
+2026-11-25 17:16:46,709 - INFO - Cluster 0: 51 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_0.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_0.html
+2026-11-25 17:16:48,396 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_1.png
+2026-11-25 17:16:48,569 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_1.html
+2026-11-25 17:16:48,569 - INFO - Cluster 1: 126 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_1.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_1.html
+2026-11-25 17:16:50,221 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_2.png
+2026-11-25 17:16:50,342 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_2.html
+2026-11-25 17:16:50,343 - INFO - Cluster 2: 85 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_2.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_2.html
+2026-11-25 17:16:51,127 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_3.png
+2026-11-25 17:16:51,218 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_3.html
+2026-11-25 17:16:51,219 - INFO - Cluster 3: 32 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_3.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_3.html
+2026-11-25 17:16:52,905 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_4.png
+2026-11-25 17:16:52,954 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_4.html
+2026-11-25 17:16:52,954 - INFO - Cluster 4: 23 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_4.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_4.html
+2026-11-25 17:16:54,343 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_5.png
+2026-11-25 17:16:54,456 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_5.html
+2026-11-25 17:16:54,456 - INFO - Cluster 5: 73 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_5.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_5.html
+2026-11-25 17:16:55,342 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_6.png
+2026-11-25 17:16:55,405 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_6.html
+2026-11-25 17:16:55,434 - INFO - Cluster 6: 34 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_6.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_6.html
+2026-11-25 17:16:57,216 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_7.png
+2026-11-25 17:16:57,415 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_7.html
+2026-11-25 17:16:57,416 - INFO - Cluster 7: 77 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_7.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_7.html
+2026-11-25 17:16:58,666 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_8.png
+2026-11-25 17:16:58,784 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_8.html
+2026-11-25 17:16:58,784 - INFO - Cluster 8: 53 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_8.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_8.html
+2026-11-25 17:16:59,883 - INFO - Mapa estático salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_9.png
+2026-11-25 17:16:59,950 - INFO - Mapa interativo salvo em: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_9.html
+2026-11-25 17:16:59,951 - INFO - Cluster 9: 36 paradas; CSV: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\rotas\rota_cluster_9.csv; mapa interativo: D:\Programas_Github\Pessoal\Rota-do-Oleo\output\graficos\rota_cluster_9.html
+2026-11-25 17:16:59,951 - INFO - Processamento concluído. Resultados em D:\Programas_Github\Pessoal\Rota-do-Oleo\output

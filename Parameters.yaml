@@ -83,10 +83,16 @@ routing:
   # Retornar ao ponto inicial após o último cliente
   return_to_start: false
 
+<<<<<<< Updated upstream
 # ==========================================
 # ARQUIVOS DE SAÍDA
 # ==========================================
 
+=======
+map:
+  basemap: "streets"
+  
+>>>>>>> Stashed changes
 output:
   directory: "./output"
 
@@ -143,4 +149,8 @@ validation:
 logging:
   enabled: true
   level: "INFO"
+<<<<<<< Updated upstream
   file: "./output/rota_do_oleo.log"
+=======
+
+>>>>>>> Stashed changes
