@@ -7,4 +7,4 @@ output/*
 !output/graficos/
 *.csv
 *.png
-
+*.html
