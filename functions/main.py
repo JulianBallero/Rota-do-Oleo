@@ -7,7 +7,7 @@ import yaml
 from functions.agrupador.kmeans import cluster_clients
 from functions.roteirizador.knn import generate_route, plot_route
 from functions.geocoding import geocode_csv
-from functions.map_generator import generate_map
+from functions.map_generator import generate_map, generate_static_map
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -151,6 +151,8 @@ def main():
     logging.info("%s grupos criados", len(clusters))
 
     route_cfg = config.get("routing", {})
+    # Mapa-base dos mapas: "satellite" (padrão) ou "streets".
+    basemap = config.get("map", {}).get("basemap", "satellite")
 
     for cluster_id, cluster_df in clusters.items():
         route = generate_route(cluster_df, route_cfg)
@@ -158,29 +160,43 @@ def main():
         route_file = routes_dir / f"rota_cluster_{cluster_id}.csv"
         route.to_csv(route_file, index=False, encoding="utf-8-sig")
 
-        # Mantém o gráfico estático já existente.
-        plot_route(
-            route,
-            graphs_dir / f"rota_cluster_{cluster_id}.png",
-            route_cfg,
+        # Gráfico estático (PNG): pontos e trajeto sobrepostos ao mapa-base.
+        # Se o mapa-base não puder ser baixado (sem internet, por exemplo),
+        # cai para o gráfico simples sem fundo.
+        png_file = graphs_dir / f"rota_cluster_{cluster_id}.png"
+        try:
+            generate_static_map(
+                route,
+                png_file,
+                lat_col=lat_col,
+                lon_col=lon_col,
+                basemap=basemap,
+            )
+        except Exception as exc:
+            logging.warning(
+                "Cluster %s: mapa-base indisponível (%s); "
+                "gerando gráfico simples sem fundo.",
+                cluster_id,
+                exc,
+            )
+            plot_route(route, png_file, route_cfg)
+
+        # Mapa interativo (HTML) com os pontos sobrepostos ao mapa.
+        map_file = f"rota_cluster_{cluster_id}.html"
+        logging.debug(
+            "Cluster %s: %s pontos; colunas: %s",
+            cluster_id,
+            len(route),
+            route.columns.tolist(),
         )
 
-        # Gera também o mapa interativo com imagem de satélite.
-        # O map_generator.py salva o HTML em ./output/graficos.
-        map_file = f"rota_cluster_{cluster_id}.html"
-        print("\n--- DEBUG DO MAPA ---")
-        print("Colunas:", route.columns.tolist())
-        print(route.head(10))
-
-        print("\nQuantidade de pontos:", len(route))
-        print("Coordenadas:")
-        print(route[[lat_col, lon_col]].head(10))
-        
         generate_map(
             route,
             filename=map_file,
             lat_col=lat_col,
-            lon_col=lon_col
+            lon_col=lon_col,
+            output_dir=graphs_dir,
+            basemap=basemap,
         )
 
         logging.info(

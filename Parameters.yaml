@@ -24,8 +24,8 @@ geocoding:
 clustering:
   algorithm: "kmeans"
   auto_clusters: true
-  min_clusters: 5
-  max_clusters: 15
+  min_clusters: 10
+  max_clusters: 20
   n_clusters: 15
   random_state: 42
   n_init: 10
@@ -39,6 +39,9 @@ routing:
   latitude_column: "latitude"
   longitude_column: "longitude"
   return_to_start: false
+
+map:
+  basemap: "streets"
 
 output:
   directory: "output"
